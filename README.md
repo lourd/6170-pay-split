@@ -33,3 +33,11 @@ A user understands that money can be transferred to another person over the Inte
 
 #### Event
 An event is a gathering of friends or acquaintances in which people split the costs of the items involved in the event. For example, an event could be a surprise birthday party, in which the items would be the supplies involved; or it could be a group of people who split the cost of a gift for their professor. In any case, a user knows one may choose to purchase, or buy an item for the event upfront, or wait until the event is over to make a payment, or reimbursement to pay their share to the event fund. What is key is that a user is settling their debt with the event, not individual people. 
+
+
+### Primary Authorship
+-----
+* Wireframes - Deborah, Louis, and Cosmin
+* Diagrams - Louis
+* Purpose and Goals, Security Concerns - Comsin
+* Concepts, Functionality, Features - Deborah
