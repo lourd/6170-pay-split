@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  total_balance: 9.99
+  organizer: 1
+
+two:
+  name: MyString
+  description: MyText
+  total_balance: 9.99
+  organizer: 1
