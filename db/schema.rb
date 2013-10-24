@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20131024181456) do
     t.integer  "receiver"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "payments", force: true do |t|
@@ -34,6 +35,8 @@ ActiveRecord::Schema.define(version: 20131024181456) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
+    t.integer  "user_id"
   end
 
   create_table "purchases", force: true do |t|
@@ -41,12 +44,16 @@ ActiveRecord::Schema.define(version: 20131024181456) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "event_id"
   end
 
-  create_table "user_balances", force: true do |t|
+  create_table "user_event_balances", force: true do |t|
     t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "event_id"
   end
 
   create_table "users", force: true do |t|
