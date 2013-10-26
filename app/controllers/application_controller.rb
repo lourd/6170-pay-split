@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
 
 	before_action :require_login
 
-	helper_method :current_user
-
 	private
 
 	def current_user
@@ -21,4 +19,6 @@ class ApplicationController < ActionController::Base
 			redirect_to log_in_url
 		end
 	end
+
+	helper_method :current_user
 end
