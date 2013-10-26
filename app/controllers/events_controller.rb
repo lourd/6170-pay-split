@@ -33,6 +33,8 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(:name => event_params[:name], :description => event_params[:description], :total_balance => 0, :organizer => current_user.id)
 
+    params[:users][:id] << current_user.id.to_s()
+
     params[:users][:id].each do |user|
       if !user.empty?
         @event.user_event_balances.build(:amount => 0, :user_id => user)
