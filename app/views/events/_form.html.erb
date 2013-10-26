@@ -19,14 +19,15 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :total_balance %><br>
-    <%= f.text_field :total_balance %>
-  </div>
-  <div class="field">
-    <%= f.label :organizer %><br>
-    <%= f.number_field :organizer %>
-  </div>
+  <% if @event.new_record? %>
+    <%= fields_for(@user_event_balance) do |usb| %>
+      <div class="field">
+        <%= usb.label "Choose users participating in the event (choose multiple with ctrl+click)" %> <br />
+        <%= collection_select(:users, :id, @all_users, :id, :email, {}, {:multiple => true, :size => 10, class:"chzn-select medium"}) %>
+      </div>
+    <% end %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

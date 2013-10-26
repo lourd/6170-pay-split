@@ -15,6 +15,10 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+
+    @all_users = User.all
+
+    @user_event_balance = @event.user_event_balances.build
   end
 
   # GET /events/1/edit
@@ -24,7 +28,13 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(:name => event_params[:name], :description => event_params[:description], :total_balance => 0, :organizer => current_user.id)
+
+    params[:users][:id].each do |user|
+      if !user.empty?
+        @event.user_event_balances.build(:amount => 0, :user_id => user)
+      end
+    end
 
     respond_to do |format|
       if @event.save
@@ -69,6 +79,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :total_balance, :organizer)
+      params.require(:event).permit(:name, :description)
     end
 end
