@@ -1,4 +1,28 @@
 <p id="notice"><%= notice %></p>
 
+
+<p>
+  <strong>Name:</strong>
+  <%= @purchase.description %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @purchase.amount %>
+</p>
+
+<p>
+  <strong>Created by (debugging):</strong>
+  <%= @purchase.user.email %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @purchase.event.name %>
+</p>
+
+
+
+
 <%= link_to 'Edit', edit_purchase_path(@purchase) %> |
 <%= link_to 'Back', purchases_path %>
