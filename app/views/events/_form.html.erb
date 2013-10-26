@@ -23,7 +23,8 @@
     <%= fields_for(@user_event_balance) do |usb| %>
       <div class="field">
         <%= usb.label "Choose users participating in the event (choose multiple with ctrl+click)" %> <br />
-        <%= collection_select(:users, :id, @all_users, :id, :email, {}, {:multiple => true, :size => 10, class:"chzn-select medium"}) %>
+        <%= collection_select(:users, :id, User.find(:all, :conditions => ["id != ?", current_user.id]), :id, :email, {}, {:multiple => true, :size => 10, class:"chzn-select medium"}) %>
+
       </div>
     <% end %>
   <% end %>

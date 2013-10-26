@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
-  before_action :check_organizer_permissions, only: [:destroy, :edit, :update]
-  before_action :check_show_permissions, only: [:show]
+  #before_action :check_organizer_permissions, only: [:destroy, :edit, :update]
+  #before_action :check_show_permissions, only: [:show]
 
   # GET /events
   # GET /events.json
