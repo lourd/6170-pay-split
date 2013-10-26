@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
+  before_action :check_organizer_permissions, only: [:destroy, :edit, :update]
+  before_action :check_show_permissions, only: [:show]
+
   # GET /events
   # GET /events.json
   def index
@@ -72,13 +75,26 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:name, :description)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:name, :description)
+  end
+
+  def check_owner_permissions
+    if @event.organizer != current_user.id
+      redirect_to root_url, :notice => "You can't access this page"
     end
+  end
+
+  def check_show_permissions
+    unless @event.organizer == curent_user.id or @event.user_event_balances.user_id.include? curent_user.id
+      redirect_to root_url, :notice => "You can't access this page"
+    end
+  end
 end
