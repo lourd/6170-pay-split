@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = current_user.events
   end
 
   # GET /events/1
@@ -19,7 +19,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
 
-    @all_users = User.all
+    @all_users = User.where(['id <> ?', current_user.id])
 
     @user_event_balance = @event.user_event_balances.build
   end
@@ -33,7 +33,9 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(:name => event_params[:name], :description => event_params[:description], :total_balance => 0, :organizer => current_user.id)
 
-    params[:users][:id] << current_user.id.to_s()
+    unless params[:users][:id].include? current_user.id.to_s()
+      params[:users][:id] << current_user.id.to_s()
+    end
 
     params[:users][:id].each do |user|
       if !user.empty?
@@ -95,8 +97,18 @@ class EventsController < ApplicationController
   end
 
   def check_show_permissions
-    unless @event.organizer == current_user.id or @event.user_event_balances.user_id.include? current_user.id
+    unless @event.organizer == current_user.id or get_users_in_event(@event).include? current_user.id
       redirect_to root_url, :notice => "You can't access this page"
     end
   end
+
+  def get_users_in_event(event)
+    ret = Array.new
+    event.user_event_balances.each do |user_event_balance|
+      ret << user_event_balance.user_id
+    end
+    return ret
+  end
+
+  helper_method :get_users_in_event
 end
