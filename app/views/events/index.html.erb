@@ -18,9 +18,20 @@
         <td><%= event.name %></td>
         <td><%= event.description %></td>
         <td><%= event.total_balance %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= button_to('Show', event, :class => 'btn btn-med btn-primary', :method => :get) %>
+        </td>
+        <% if event.organizer == current_user.id %>
+          <td>
+            <%= button_to('Edit', edit_event_path(event), :class => 'btn btn-med btn-primary', :method => :get) %>
+          </td>
+        <% end %>
+
+        <% if event.organizer == current_user.id %>
+          <td>
+            <%= button_to('Destroy', event, :class => 'btn btn-med btn-primary', :method => :delete, data: {confirm: 'Are you sure?'} ) %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
