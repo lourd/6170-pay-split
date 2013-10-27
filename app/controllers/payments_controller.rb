@@ -2,7 +2,7 @@ class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
 
   before_action :check_owner, only: [:edit, :update, :destroy]
-  before_actoin :check_no_payments, only: [:edit, :update, :destroy]
+  before_action :check_no_payments, only: [:edit, :update, :destroy]
   before_action :check_access, only: [:show]
 
   # GET /payments
