@@ -15,6 +15,16 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @payment = Payment.new
+    if Event.exists?(params[:event_id])
+      @event = Event.find(params[:event_id])
+      if current_user.events.exists?(@event.id)
+        @pre_selected_event = @event.id
+      else
+        @pre_selected_event = 0
+      end
+    else
+      @pre_selected_event = 0
+    end
   end
 
   # GET /payments/1/edit
@@ -28,6 +38,11 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
+
+        # Update all user_event_balances
+        @payment.event.user_event_balances.each do |ueb|
+          ueb.update_amount_owed
+        end
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @payment }
       else
