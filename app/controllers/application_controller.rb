@@ -20,5 +20,15 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def get_users_in_event(event)
+	    ret = Array.new
+	    event.user_event_balances.each do |user_event_balance|
+	     	ret << user_event_balance.user_id
+	    end
+	    return ret
+  	end
+
+  helper_method :get_users_in_event
+
 	helper_method :current_user
 end

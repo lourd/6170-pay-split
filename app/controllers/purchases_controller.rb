@@ -1,11 +1,13 @@
   class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
-  helper EventsHelper
+  before_action :check_owner, only: [:edit, :update, :destroy]
+  before_action :check_access, only: [:show]
+
   # GET /purchases
   # GET /purchases.json
   def index
-    @purchases = Purchase.all
+    @purchases = current_user.purchases
   end
 
   # GET /purchases/1
@@ -88,5 +90,17 @@
     def purchase_params
 
       params.require(:purchase).permit(:amount, :description, :event_id, :user_id)
+    end
+
+    def check_owner
+      unless @purchase.user_id == current_user.id
+        redirect_to root_url, :notice => "You can't access this page"
+      end
+    end
+
+    def check_access
+      unless get_users_in_event(@purchase.event).include? current_user.id
+        redirect_to root_url, :notice => "You can't access this page"
+      end
     end
 end

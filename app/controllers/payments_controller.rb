@@ -1,10 +1,13 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
 
+  before_action :check_owner, only: [:edit, :update, :destroy]
+  before_action :check_access, only: [:show]
+
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
+    @payments = current_user.payments
   end
 
   # GET /payments/1
@@ -85,6 +88,17 @@ class PaymentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
       params.require(:payment).permit(:amount, :description, :event_id, :user_id)
+    end
 
+    def check_owner
+      unless @payment.user_id == current_user.id
+        redirect_to root_url, :notice => "You can't access this page"
+      end
+    end
+
+    def check_access
+      unless get_users_in_event(@payment.event).include? current_user.id
+        redirect_to root_url, :notice => "You can't access this page"
+      end
     end
 end

@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
-  #before_action :check_organizer_permissions, only: [:destroy, :edit, :update]
-  #before_action :check_show_permissions, only: [:show]
+  before_action :check_organizer_permissions, only: [:destroy, :edit, :update]
+  before_action :check_show_permissions, only: [:show]
 
   # GET /events
   # GET /events.json
@@ -101,14 +101,4 @@ class EventsController < ApplicationController
       redirect_to root_url, :notice => "You can't access this page"
     end
   end
-
-  def get_users_in_event(event)
-    ret = Array.new
-    event.user_event_balances.each do |user_event_balance|
-      ret << user_event_balance.user_id
-    end
-    return ret
-  end
-
-  helper_method :get_users_in_event
 end
