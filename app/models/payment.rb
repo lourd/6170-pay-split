@@ -16,8 +16,8 @@ class Payment < ActiveRecord::Base
 	end
 
 	def validate_amount
-		unless self.amount and self.amount != 0
-			self.errors.add(:amount, 'must not be 0.')
+		unless self.amount and self.amount > 0
+			self.errors.add(:amount, 'must be positive')
 		end
 	end
 end
