@@ -2,7 +2,6 @@ class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
 
   before_action :check_owner, only: [:edit, :update, :destroy]
-  before_action :check_no_payments, only: [:edit, :update, :destroy]
   before_action :check_access, only: [:show]
 
   # GET /payments
@@ -98,8 +97,8 @@ class PaymentsController < ApplicationController
     end
 
     def check_owner
-      unless @payment.user_id == current_user.id
-        redirect_to root_url, :notice => "You can't access this page"
+      unless false # @payment.user_id == current_user.id
+        redirect_to :back, :notice => "You can't access this page"
       end
     end
 
