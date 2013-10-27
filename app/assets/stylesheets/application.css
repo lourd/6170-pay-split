@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+    padding-top: 50px; /* Whatever the height of your navbar is; the
+                             default is 50px */
+}

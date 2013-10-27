@@ -15,8 +15,8 @@ class Purchase < ActiveRecord::Base
 	end
 
 	def validate_amount
-		if self.amount == 0
-			self.errors.add(:amount, 'must not be 0.')
+		unless self.amount > 0
+			self.errors.add(:amount, 'must be positive')
 		end
 	end
 end
