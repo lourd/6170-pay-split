@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
 
   before_action :check_owner, only: [:edit, :update, :destroy]
+  before_action :check_no_payments, only: [:edit, :update, :destroy]
   before_action :check_access, only: [:show]
 
   # GET /payments
@@ -37,20 +38,26 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-    @payment = Payment.new(payment_params)
+    event_id = purchase_params[:event_id]
+    
+    if Event.find(event_id).purchase_closed == false
+      redirect_to :back, notice: 'You can\'t add payments to this event yet.'
+    else
+      @payment = Payment.new(payment_params)
 
-    respond_to do |format|
-      if @payment.save
+      respond_to do |format|
+        if @payment.save
 
-        # Update all user_event_balances
-        @payment.event.user_event_balances.each do |ueb|
-          ueb.update_amount_owed
+          # Update all user_event_balances
+          @payment.event.user_event_balances.each do |ueb|
+            ueb.update_amount_owed
+          end
+          format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @payment }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @payment.errors, status: :unprocessable_entity }
         end
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @payment }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
   end

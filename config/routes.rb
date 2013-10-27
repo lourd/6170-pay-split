@@ -1,4 +1,5 @@
 DeborahcGcosmin0LourdProj3::Application.routes.draw do
+  get "welcome/landing"
   resources :users
   resources :sessions
   resources :events
@@ -9,8 +10,11 @@ DeborahcGcosmin0LourdProj3::Application.routes.draw do
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
 
+  get 'events/:id/close_purchase' => 'events#close_purchase', :as => 'close_purchase_event'
 
-  root :to => "events#index"
+  root :to => "welcome#landing"
+
+  #root :to => "events#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

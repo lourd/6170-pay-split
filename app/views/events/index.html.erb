@@ -1,3 +1,4 @@
+
 <h1>Listing events</h1>
 
 <table>
@@ -16,12 +17,14 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.name %></td>
+        <td><%= link_to event.name, event_path(event) %></td>
+
+
+
+
         <td><%= event.description %></td>
         <td><%= event.total_balance %></td>
-        <td>
-          <%= button_to('Show', event, :class => 'btn btn-med btn-primary', :method => :get) %>
-        </td>
+      
 
         <td>
           <%= button_to new_purchase_url, :method => :get, :class => 'btn btn-med btn-primary' do %>
@@ -37,8 +40,11 @@
           <% end %>
         </td>
 
-
-
+        <% if event.organizer == current_user.id %>
+          <td>
+            <%= button_to 'Close Purchases', close_purchase_event_path(event), :method => :get, :class => 'btn btn-med btn-primary', data: {confirm: "Are you sure? This will make users unable to add any more purchases to the event!"} %>
+          </td>
+        <% end %>
 
         <% if event.organizer == current_user.id %>
           <td>
@@ -67,3 +73,4 @@
 <div>
 <%= button_to('New Event', new_event_path, :class => 'btn btn-med btn-primary', :method => :get) %>
 </div>
+
