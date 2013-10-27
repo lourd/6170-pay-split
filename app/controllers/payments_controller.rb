@@ -28,6 +28,11 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
+
+        # Update all user_event_balances
+        @payment.event.user_event_balances.each do |ueb|
+          ueb.update_amount_owed
+        end
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @payment }
       else

@@ -1,6 +1,7 @@
-class PurchasesController < ApplicationController
+  class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
+  helper EventsHelper
   # GET /purchases
   # GET /purchases.json
   def index
@@ -28,6 +29,12 @@ class PurchasesController < ApplicationController
 
     respond_to do |format|
       if @purchase.save
+
+        # Update all user_event_balances
+        @purchase.event.user_event_balances.each do |ueb|
+          ueb.update_amount_owed
+        end
+
         format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.json { render action: 'show', status: :created, location: @purchase }
       else

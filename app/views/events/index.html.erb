@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Description</th>
       <th>Total balance</th>
+      <th>What is owed
       <th></th>
       <th></th>
       <th></th>
@@ -18,9 +19,20 @@
         <td><%= event.name %></td>
         <td><%= event.description %></td>
         <td><%= event.total_balance %></td>
+
+
+        <!-- For debugging -->
+        <% event.user_event_balances.each do |ueb| %>
+          <td><%= ueb.user.email %></td>          
+          <td><%= ueb.amount %></td>
+          <% end %>
+
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
+
       </tr>
     <% end %>
   </tbody>
