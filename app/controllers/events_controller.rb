@@ -40,7 +40,7 @@ class EventsController < ApplicationController
     end
 
     params[:users][:id].each do |user|
-      if !user.empty?
+      unless user.empty?
         @event.user_event_balances.build(:amount => 0, :user_id => user)
       end
     end

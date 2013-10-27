@@ -31,4 +31,5 @@ class ApplicationController < ActionController::Base
   	helper_method :get_users_in_event
 
 	helper_method :current_user
+	
 end
