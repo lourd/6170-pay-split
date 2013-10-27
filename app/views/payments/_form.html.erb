@@ -25,8 +25,8 @@
 
   <!--Show list of all events -->
   <div class="field">
-    <%= f.label :event %><br>
-    <%= f.select(:event, current_user.events.all.map {|p| [p.name,p.id]}, :prompt => "Select an Event", :selected => @pre_selected_event) %>
+    <%= f.label :Event %><br>
+    <%= f.select(:event_id, current_user.events.all.map {|p| [p.name,p.id]}, :prompt => "Select an Event", :selected => @pre_selected_event) %>
   </div>
 
   <div class="actions">
