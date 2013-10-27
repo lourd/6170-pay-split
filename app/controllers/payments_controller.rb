@@ -37,7 +37,7 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-    event_id = purchase_params[:event_id]
+    event_id = payment_params[:event_id]
     
     if Event.find(event_id).purchase_closed == false
       redirect_to :back, notice: 'You can\'t add payments to this event yet.'
