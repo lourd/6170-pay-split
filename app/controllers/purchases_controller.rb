@@ -37,21 +37,27 @@
   # POST /purchases
   # POST /purchases.json
   def create
-    @purchase = Purchase.new(purchase_params)
+    event_id = purchase_params[:event_id]
+    
+    if Event.find(event_id).purchase_closed == true
+      redirect_to :back, notice: 'You can\'t add anymore purchases to this event.'
+    else
+      @purchase = Purchase.new(purchase_params)
 
-    respond_to do |format|
-      if @purchase.save
+      respond_to do |format|
+        if @purchase.save
 
-        # Update all user_event_balances
-        @purchase.event.user_event_balances.each do |ueb|
-          ueb.update_amount_owed
+          # Update all user_event_balances
+          @purchase.event.user_event_balances.each do |ueb|
+            ueb.update_amount_owed
+          end
+
+          format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @purchase }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @purchase.errors, status: :unprocessable_entity }
         end
-
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @purchase }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
     end
   end
