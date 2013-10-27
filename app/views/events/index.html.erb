@@ -40,8 +40,11 @@
           <% end %>
         </td>
 
-
-
+        <% if event.organizer == current_user.id %>
+          <td>
+            <%= button_to 'Close Purchases', close_purchase_event_path(event), :method => :get, :class => 'btn btn-med btn-primary', data: {confirm: "Are you sure? This will make users unable to add any more purchases to the event!"} %>
+          </td>
+        <% end %>
 
         <% if event.organizer == current_user.id %>
           <td>
