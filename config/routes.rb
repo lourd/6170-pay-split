@@ -9,6 +9,7 @@ DeborahcGcosmin0LourdProj3::Application.routes.draw do
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
 
+  get 'events/:id/close_purchase' => 'events#close_purchase', :as => 'close_purchase_event'
 
   root :to => "events#index"
 

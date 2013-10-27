@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :close_purchase]
 
-  before_action :check_organizer_permissions, only: [:destroy, :edit, :update]
+  before_action :check_organizer_permissions, only: [:destroy, :edit, :update, :close_purchase]
   before_action :check_show_permissions, only: [:show]
 
   # GET /events
@@ -31,7 +31,9 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(:name => event_params[:name], :description => event_params[:description], :total_balance => 0, :organizer => current_user.id)
+    @event = Event.new(:name => event_params[:name],
+      :description => event_params[:description],
+      :total_balance => 0, :organizer => current_user.id, :purchase_closed => false)
 
     unless params[:users][:id].include? current_user.id.to_s()
       params[:users][:id] << current_user.id.to_s()
@@ -76,6 +78,13 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url }
       format.json { head :no_content }
     end
+  end
+
+  # GET /events/1/close_purchase
+  def close_purchase
+    @event.close_purchases
+
+    redirect_to(:back)
   end
 
   private
