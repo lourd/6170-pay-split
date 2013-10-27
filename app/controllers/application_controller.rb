@@ -28,7 +28,8 @@ class ApplicationController < ActionController::Base
 	    return ret
   	end
 
-  helper_method :get_users_in_event
+  	helper_method :get_users_in_event
 
 	helper_method :current_user
+	
 end
