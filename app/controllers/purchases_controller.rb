@@ -49,7 +49,8 @@
 
           # Update all user_event_balances
           @purchase.event.user_event_balances.each do |ueb|
-            ueb.update_amount_owed
+            ueb.update_debt
+            ueb.update_credit_after_purchase
           end
 
           format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
@@ -94,7 +95,6 @@
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-
       params.require(:purchase).permit(:amount, :description, :event_id, :user_id)
     end
 

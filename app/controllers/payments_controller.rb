@@ -37,7 +37,7 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-    event_id = purchase_params[:event_id]
+    event_id = payment_params[:event_id]
     
     if Event.find(event_id).purchase_closed == false
       redirect_to :back, notice: 'You can\'t add payments to this event yet.'
@@ -47,9 +47,10 @@ class PaymentsController < ApplicationController
       respond_to do |format|
         if @payment.save
 
-          # Update all user_event_balances
+          # Update all user_event_balances with new debt
           @payment.event.user_event_balances.each do |ueb|
-            ueb.update_amount_owed
+            ueb.update_debt
+            ueb.update_credit_after_payment(payment_params[:user_id], payment_params[:amount])
           end
           format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
           format.json { render action: 'show', status: :created, location: @payment }

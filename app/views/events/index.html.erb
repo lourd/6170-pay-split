@@ -61,7 +61,9 @@
         <!-- For debugging -->
         <% event.user_event_balances.each do |ueb| %>
           <td><%= ueb.user.email %></td>          
-          <td><%= ueb.amount %></td>
+          <td><%= ueb.debt %></td>
+          <td><%= ueb.credit %></td>
+
           <% end %>
       </tr>
     <% end %>
