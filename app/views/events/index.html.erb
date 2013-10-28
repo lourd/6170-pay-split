@@ -25,26 +25,35 @@
         <td><%= event.description %></td>
         <td><%= event.total_balance %></td>
       
+        <% if event.purchase_closed %>
 
-        <td>
-          <%= button_to new_purchase_url, :method => :get, :class => 'btn btn-med btn-primary' do %>
-          Add Purchase
-          <%= hidden_field_tag :event_id, event.id %>
-          <% end %>
-        </td>
-
-        <td>
+          <td>
           <%= button_to new_payment_url, :method => :get, :class => 'btn btn-med btn-primary' do %>
           Add Payment
           <%= hidden_field_tag :event_id, event.id %>
           <% end %>
-        </td>
+          </td>
 
-        <% if event.organizer.id == current_user.id %>
+
+        <% else %>
+          <td>
+            <%= button_to new_purchase_url, :method => :get, :class => 'btn btn-med btn-primary' do %>
+            Add Purchase
+            <%= hidden_field_tag :event_id, event.id %>
+            <% end %>
+          </td>
+
+          <% if event.organizer.id == current_user.id %>
           <td>
             <%= button_to 'Close Purchases', close_purchase_event_path(event), :method => :get, :class => 'btn btn-med btn-primary', data: {confirm: "Are you sure? This will make users unable to add any more purchases to the event!"} %>
           </td>
+          <% end %>
+          
         <% end %>
+
+        
+
+        
 
         <% if event.organizer.id == current_user.id %>
           <td>
