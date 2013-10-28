@@ -1,0 +1,15 @@
+<section class="section-wrapper not-found-w">
+  <div class="container">
+    <div class="row">
+      <div class="span8">
+        <h1>Page not found</h1>
+        <h4>Sorry, the page you requested may have been moved or deleted.</h4>
+        <div class="not-found-solutions btn-group">
+          <%= link_to raw('<i class="icon-circle-arrow-left"></i> Revisit the previous page'), "#", class: "btn", onclick: "javascript:window.history.back();return false;" %>
+          <%= link_to raw('<i class="icon-home"></i> Go to the homepage'), root_path, class: "btn" %>
+        </div>
+    </div>
+  </div>
+</div>
+</section>
+

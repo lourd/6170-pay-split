@@ -14,6 +14,10 @@ DeborahcGcosmin0LourdProj3::Application.routes.draw do
 
   root :to => "welcome#landing"
 
+  #unless Rails.application.config.consider_all_requests_local
+    get '/404' =>'errors#not_found'
+  #end
+
   #root :to => "events#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
