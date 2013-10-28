@@ -59,12 +59,12 @@
         <% end %>
 
         <!-- For debugging -->
-        <% event.user_event_balances.each do |ueb| %>
+<!--         <% event.user_event_balances.each do |ueb| %>
           <td><%= ueb.user.email %></td>          
           <td><%= ueb.debt %></td>
           <td><%= ueb.credit %></td>
 
-          <% end %>
+          <% end %> -->
       </tr>
     <% end %>
   </tbody>
@@ -74,5 +74,7 @@
 
 <div>
 <%= button_to('New Event', new_event_path, :class => 'btn btn-med btn-primary', :method => :get) %>
+<%= button_to('See All Purchases', purchases_path, :class => 'btn btn-med btn-primary', :method => :get) %>
+<%= button_to('See All Payments', payments_path, :class => 'btn btn-med btn-primary', :method => :get) %>
 </div>
 

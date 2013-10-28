@@ -3,10 +3,9 @@
 <table>
   <thead>
     <tr>
-
+      <th>Event</th>
       <th>Description</th>
       <th>Amount</th>
-      <th>Event</th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,9 +16,9 @@
     <% @purchases.each do |purchase| %>
       <tr>
 
+        <td><%= link_to purchase.event.name, event_path(purchase.event) %></td>
         <td><%= purchase.description %></td>
         <td><%= purchase.amount %></td>
-        <td><%= link_to purchase.event.name, event_path(purchase.event) %></td>
 
 
         <td><%= link_to 'Show', purchase %></td>
