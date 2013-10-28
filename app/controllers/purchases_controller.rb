@@ -50,7 +50,7 @@
           # Update all user_event_balances
           @purchase.event.user_event_balances.each do |ueb|
             ueb.update_debt
-            ueb.update_credit
+            ueb.update_credit_after_purchase
           end
 
           format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
