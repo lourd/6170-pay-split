@@ -100,13 +100,13 @@ class EventsController < ApplicationController
   end
 
   def check_organizer_permissions
-    if @event.organizer != current_user.id
+    if @event.organizer.id != current_user.id
       redirect_to root_url, :notice => "You can't access this page"
     end
   end
 
   def check_show_permissions
-    unless @event.organizer == current_user.id or get_users_in_event(@event).include? current_user.id
+    unless @event.organizer.id == current_user.id or get_users_in_event(@event).include? current_user.id
       redirect_to root_url, :notice => "You can't access this page"
     end
   end

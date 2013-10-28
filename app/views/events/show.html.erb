@@ -1,24 +1,37 @@
-<p id="notice"><%= notice %></p>
+	<p id="notice"><%= notice %></p>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span2">
+				
+			</div>
+			<div class="span7">
+				<p class="">
+				  <h2><%= @event.name %></strong></h2>	
+				</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+				<p class="">
+				  <%= @event.description %>
+				</p>
+			</div>
+			<div class="span3">
+				<p>
+				  <strong>Total balance:</strong>
+				  <%= @event.total_balance %>
+				</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+				<p>
+				  <strong>Organizer:</strong>
+				  <%= @event.organizer.first_name %>
+				</p>
+			</div>
+		</div>
+	</div>
 
-<p>
-  <strong>Total balance:</strong>
-  <%= @event.total_balance %>
-</p>
-
-<p>
-  <strong>Organizer:</strong>
-  <%= @event.organizer %>
-</p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
+
+
+
+
+
