@@ -38,8 +38,8 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     event_id = payment_params[:event_id]
-    
-    if Event.find(event_id).purchase_closed == false
+    @event = Event.find(event_id)
+    if @event.purchase_closed == false
       redirect_to :back, notice: 'You can\'t add payments to this event yet.'
     else
       @payment = Payment.new(payment_params)
@@ -52,7 +52,7 @@ class PaymentsController < ApplicationController
             ueb.update_debt
             ueb.update_credit_after_payment(payment_params[:user_id], payment_params[:amount])
           end
-          format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+          format.html { redirect_to @event, notice: 'Payment was successfully created.' }
           format.json { render action: 'show', status: :created, location: @payment }
         else
           format.html { render action: 'new' }

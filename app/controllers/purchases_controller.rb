@@ -38,22 +38,22 @@
   # POST /purchases.json
   def create
     event_id = purchase_params[:event_id]
-    
-    if Event.find(event_id).purchase_closed == true
+    @event = Event.find(event_id)
+    if @event.purchase_closed == true
       redirect_to :back, notice: 'You can\'t add anymore purchases to this event.'
     else
       @purchase = Purchase.new(purchase_params)
 
       respond_to do |format|
         if @purchase.save
-
+          @event.update_total_balance
           # Update all user_event_balances
           @purchase.event.user_event_balances.each do |ueb|
             ueb.update_debt
             ueb.update_credit_after_purchase
           end
 
-          format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+          format.html { redirect_to @event, notice: 'Purchase was successfully created.' }
           format.json { render action: 'show', status: :created, location: @purchase }
         else
           format.html { render action: 'new' }

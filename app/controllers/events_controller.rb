@@ -33,7 +33,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(:name => event_params[:name],
       :description => event_params[:description],
-      :total_balance => 0, :organizer => current_user.id, :purchase_closed => false)
+      :total_balance => 0, :organizer => current_user, :purchase_closed => false)
 
     unless params[:users][:id].include? current_user.id.to_s()
       params[:users][:id] << current_user.id.to_s()
