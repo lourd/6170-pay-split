@@ -16,8 +16,8 @@ class Payment < ActiveRecord::Base
 	end
 
 	def validate_amount
-		unless self.amount and self.amount > 0
-			self.errors.add(:amount, 'must be positive')
+		unless self.amount and self.amount > 0 and self.amount == self.event.user_event_balances.find_by_user_id(self.user.id).debt
+			self.errors.add(:amount, 'The amount you pay must equal the amount you owe')
 		end
 	end
 end
