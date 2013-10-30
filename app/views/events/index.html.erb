@@ -7,7 +7,7 @@
       <th>Name</th>
       <th>Description</th>
       <th>Total balance</th>
-      <th>What is owed
+      <th>Amount You Owe</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,12 +18,9 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= link_to event.name, event_path(event) %></td>
-
-
-
-
         <td><%= event.description %></td>
         <td><%= number_to_currency(event.total_balance) %></td>
+        <td><%= number_to_currency(event.find_user_event_balance(current_user.id).debt) %></td>
       
         <% if event.purchase_closed %>
 
