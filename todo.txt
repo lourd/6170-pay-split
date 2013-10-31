@@ -5,6 +5,8 @@ ui improvement - 1
     Louis
 design document - 1
     security concerns
+        security policy: who can do what, specifically
+        threat model: which attacks we think will be most likely
 
 venmo - 2
     Deborah
@@ -14,4 +16,5 @@ redefine closing - 2
 usability
     add/remove people in the group - 3
     inviting people to the group - 3
+
 
