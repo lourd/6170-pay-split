@@ -39,8 +39,8 @@ class PaymentsController < ApplicationController
   def create
     event_id = payment_params[:event_id]
     @event = Event.find(event_id)
-    if @event.purchase_closed == false
-      redirect_to :back, notice: 'You can\'t add payments to this event yet.'
+    if @event.closed == true
+      redirect_to :back, notice: 'You no longer add purchases to this event.'
     else
       @payment = Payment.new(payment_params)
 

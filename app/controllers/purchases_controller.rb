@@ -1,4 +1,4 @@
-  class PurchasesController < ApplicationController
+class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
   before_action :check_owner, only: [:edit, :update, :destroy]
@@ -39,7 +39,7 @@
   def create
     event_id = purchase_params[:event_id]
     @event = Event.find(event_id)
-    if @event.purchase_closed == true
+    if @event.closed == true
       redirect_to :back, notice: 'You can\'t add anymore purchases to this event.'
     else
       @purchase = Purchase.new(purchase_params)

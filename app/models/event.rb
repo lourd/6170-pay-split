@@ -11,13 +11,13 @@ class Event < ActiveRecord::Base
 		self.update_attribute(:total_balance, self.purchases.sum('amount'))
 	end
 
-	# Set an event as purchase_closed so it can stop accepting purchases and start accepting payments
-	def close_purchases
-    	self.update_attribute(:purchase_closed, true)
+	# Set an event as closed so it can stop accepting purchases or payments anymore
+	def close_event
+    	self.update_attribute(:closed, true)
   	end
 
   	# Wrapper method to find the user_event_balance attached to a specific event and id
   	def find_user_event_balance(user_id)
   		self.user_event_balances.find_by_user_id(user_id)
   	end
-end
+end8

@@ -17,4 +17,3 @@ usability
     add/remove people in the group - 3
     inviting people to the group - 3
 
-
