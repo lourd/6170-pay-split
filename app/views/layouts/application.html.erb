@@ -41,16 +41,13 @@
 </div>
 <% end %>
 
-<!-- <span class="flash-span"> -->
   
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :class => "flash", :id => "flash_#{name}" %>
 <% end %>
 
-<!-- </span> -->
-
-<div class="container">
+<!-- <div class="container"> -->
  <%= yield %>
-</div>
+<!-- </div> -->
 </body>
 </html>
