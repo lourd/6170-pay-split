@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :close_purchase]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :close_event]
 
-  before_action :check_organizer_permissions, only: [:destroy, :edit, :update, :close_purchase]
+  before_action :check_organizer_permissions, only: [:destroy, :edit, :update, :close_event]
   before_action :check_show_permissions, only: [:show]
 
   # GET /events
@@ -33,7 +33,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(:name => event_params[:name],
       :description => event_params[:description],
-      :total_balance => 0, :organizer => current_user, :purchase_closed => false)
+      :total_balance => 0, :organizer => current_user, :closed => false)
 
     unless params[:users][:id].include? current_user.id.to_s()
       params[:users][:id] << current_user.id.to_s()
@@ -80,9 +80,9 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1/close_purchase
-  def close_purchase
-    @event.close_purchases
+  # GET /events/1/close_event
+  def close_event
+    @event.close_event
 
     redirect_to(:back)
   end
