@@ -131,3 +131,83 @@ body, html, .container, .row {
 	font-size: 40pt;
 	line-height: 176px;
 }
+
+.brand {
+	color: white;
+}
+
+#events-left {
+	float: left;
+	width: 75%;
+	height: 400px;
+	padding-left: 5%;
+}
+
+#events-right {
+	background-color: #eee;
+	width: 256px;
+	position: fixed;
+	/*height: 400px;*/
+	right: 0;
+	top: 40px;
+	bottom: 0;
+	padding-top: 10px;
+	/*padding-left: 10px;*/
+
+	.my-btn {
+		width: 90%;
+		margin-left: 5%;
+		margin-right: 5%;
+		margin-bottom: -10px;
+	}
+	
+}
+
+#owe-text {
+	margin-bottom: 0px;
+}
+
+#owed-text {
+	margin-top: 0px;
+}
+
+.my-h2 {
+	margin-left: 5%;
+	font-family: arial;
+	font-size: 24px;
+	margin-right: 10%;
+}
+
+#total-debt {
+	color: red;
+	float: right;
+}
+
+#total-credit {
+	color: green;
+	float: right;
+}
+
+.my-navbar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin-bottom: 0px;
+	border-radius: 0px;
+	background-color: black;
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 40px;
+	clear: both;
+}
+
+a.brand {
+	font-family: times;
+	font-size: 24px;
+	padding-top: 10px;
+	&:hover {
+		color: white;
+		text-decoration: none;
+	}
+}

@@ -13,30 +13,14 @@
 
 
 <% if current_user %>
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-
-      </button>
-      <a class="brand"  <%= link_to "PaymentSplit", events_path %>
-
-      </a>
-      <!-- <div id="user_nav pull-left"> -->
-      <div>
+<div class="my-navbar">
+      <a class="brand pull-left"  <%= link_to "Split-Pay", events_path %></a>
         <p id="logout-text" class="pull-right">
-          Logged in as <%= current_user.email %>.
+          <strong><%= current_user.email %></strong>
             <%= link_to "Log out", log_out_path %>
             <!--<%= link_to "Sign up", sign_up_path %> -->
             <!-- <%= link_to "log in", log_in_path %> -->
         </p>
-      </div>
-      <!-- </div> -->
-
-
-    </div>
-
-  </div>
 
 </div>
 <% end %>
