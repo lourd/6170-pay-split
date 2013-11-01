@@ -80,5 +80,4 @@ class UserEventBalance < ActiveRecord::Base
 	def update_credit_after_payment(sender_id, payment)
 		self.update_attribute(:credit, determine_new_credit_after_payment(sender_id, payment))
 	end
-
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131027204255) do
+ActiveRecord::Schema.define(version: 20131101210705) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20131027204255) do
     t.integer  "organizer"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "purchase_closed"
+    t.boolean  "closed"
   end
 
   create_table "payment_splits", force: true do |t|
