@@ -22,8 +22,8 @@
         <td><%= number_to_currency(event.total_balance) %></td>
         <td><%= number_to_currency(event.find_user_event_balance(current_user.id).debt) %></td>
       
-        <% if !event.closed %>
 
+        <% if event.closed == false %>
           <td>
           <%= button_to new_payment_url, :method => :get, :class => 'btn btn-med btn-primary' do %>
           Add Payment
@@ -39,12 +39,12 @@
           </td>
 
           <% if event.organizer.id == current_user.id %>
-          <td>
-            <%= button_to 'Close Event', close_purchase_event_path(event), :method => :get, :class => 'btn btn-med btn-primary', data: {confirm: "Are you sure? This will make users unable to add any more purchases or payments to the event!"} %>
-          </td>
+            <td>
+              <%= button_to 'Close Event', close_event_path(event), :method => :get, :class => 'btn btn-med btn-primary', data: {confirm: "Are you sure? This will make users unable to add any more purchases or payments to the event!"} %>
+            </td>
           <% end %>
-
         <% end %>
+
 
         <% if event.organizer.id == current_user.id %>
           <td>
@@ -57,14 +57,6 @@
             <%= button_to('Delete', event, :class => 'btn btn-med btn-primary', :method => :delete, data: {confirm: 'Are you sure?'} ) %>
           </td>
         <% end %>
-
-        <!-- For debugging -->
-<!--         <% event.user_event_balances.each do |ueb| %>
-          <td><%= ueb.user.email %></td>          
-          <td><%= ueb.debt %></td>
-          <td><%= ueb.credit %></td>
-
-          <% end %> -->
       </tr>
     <% end %>
   </tbody>

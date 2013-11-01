@@ -20,4 +20,4 @@ class Event < ActiveRecord::Base
   	def find_user_event_balance(user_id)
   		self.user_event_balances.find_by_user_id(user_id)
   	end
-end8
+end
