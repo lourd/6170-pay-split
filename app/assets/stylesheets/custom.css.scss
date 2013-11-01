@@ -11,3 +11,43 @@
 .event_left_sidebar {
 	background-color: #EEE;
 }
+
+#logout-text {
+	padding-top: 10px;
+	color: white;
+}
+
+/*#flash-span {
+	display: inline-block;
+	clear: both;
+}*/
+
+.flash {
+	position: relative;
+	left: 50%;
+	/* Centers the element*/
+	transform:translate(-50%);
+	-webkit-transform: translate(-50%);
+	width: 200px;
+	padding: 5px;
+  	margin-bottom: 20px;
+  	text-align: center;
+  	clear: both;
+}
+
+#flash_success {
+  border: 1px solid green;
+  background-color: #ae8;
+  color: green;
+}
+
+#flash_notice {
+  border: 1px solid red;
+  background-color: #ea8;
+  color: red;
+}
+
+.container {
+	clear: both;
+}
+
