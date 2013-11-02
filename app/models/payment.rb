@@ -23,6 +23,7 @@ class Payment < ActiveRecord::Base
 		end
 	end
 
+	# This should go under event
 	def find_user_event_balances_with_credit_exclude_sender(sender_id)
 		self.event.user_event_balances.where.not(user_id: sender_id).where('credit > 0').order("credit DESC")
 	end

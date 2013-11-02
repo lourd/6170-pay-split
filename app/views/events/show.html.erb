@@ -66,14 +66,14 @@
 		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).debt)  %></p>
 		<h3>You're Owed</h3>
 		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).credit)  %></p>
-
+		<h3>For debugging: You've Paid</h3>
+		<p><%= number_to_currency(@event.find_total_payments_made_by_user(current_user.id))  %></p>
+		<h3>For debugging:You've received</h3>
+		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).payment_received)  %></p>
+<!--  -->
 	</div>
 </div>
 
 
 <%= link_to 'Back', events_path %>
-
-
-
-
 
