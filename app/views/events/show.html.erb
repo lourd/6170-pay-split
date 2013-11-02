@@ -1,76 +1,74 @@
-	<div class="container">
-		<div class="row">
-			<div class="span2 event_left_sidebar">
-				<%= button_to('Edit Event', edit_event_path(@event), :class => 'btn btn-med btn-primary', :method => :get) %>
-				<h3>Organizer:</h3>
-				<h4><%= @event.organizer.first_name %></h4>
-				<h3>Members</h3>
-				<% @event.users.each do |user|  %>
-				<p><%="#{user.first_name} #{user.last_name}"%></p>
-				<% end %>
-			</div>
-			<div class="span7">
-				<p class="event_name">
-				  <h2><%= @event.name %></strong></h2>	
-				</p>
+<div class="row">
+	<div class="span2 event_left_sidebar">
+		<%= button_to('Edit Event', edit_event_path(@event), :class => 'btn btn-med btn-primary', :method => :get) %>
+		<h3>Organizer:</h3>
+		<h4><%= @event.organizer.first_name %></h4>
+		<h3>Members</h3>
+		<% @event.users.each do |user|  %>
+		<p><%="#{user.first_name} #{user.last_name}"%></p>
+		<% end %>
+	</div>
+	<div class="span7">
+		<p class="event_name">
+		  <h2><%= @event.name %></strong></h2>	
+		</p>
 
-				<p class="event_description">
-				  <%= @event.description %>
-				</p>
+		<p class="event_description">
+		  <%= @event.description %>
+		</p>
+		<div class="row">
+			<div class="span3 purchase_list">
+				<h4>Purchases</h4>
+				<% @event.purchases.each do |purchase| %>
 				<div class="row">
-					<div class="span3 purchase_list">
-						<h4>Purchases</h4>
-						<% @event.purchases.each do |purchase| %>
-						<div class="row">
-							<div class="span2">
-								<p><%= purchase.description %></p>
-							</div>
-							<div class="span1">
-								<p><strong><%= number_to_currency(purchase.amount)%></strong></p>
-							</div>
-						</div>
-						<% end %>
+					<div class="span2">
+						<p><%= purchase.description %></p>
 					</div>
-					<div class="span3 payment_list">
-						<h4>Payments</h4>
-						<% @event.payments.each do |payment| %>
-						<div class="row">
-							<div class="span2">
-								<p><%= "#{payment.user.first_name} #{payment.user.last_name}" %></p>
-							</div>
-							<div class="span1">
-								<p><strong><%= number_to_currency(payment.amount)%></strong></p>
-							</div>
-						</div>	
-						<% end %>
+					<div class="span1">
+						<p><strong><%= number_to_currency(purchase.amount)%></strong></p>
 					</div>
 				</div>
-
-
-				
+				<% end %>
 			</div>
-			<div class="span3">
-				<h3>Event Total</h3>
-				<p><%= number_to_currency(@event.total_balance) %></p>
-				<%= button_to new_purchase_url, :method => :get, :class => 'btn btn-med btn-primary', :method => :get do %>
-				Add Purchase
-				<%= hidden_field_tag :event_id, @event.id %>
-          		<% end %>
-          		<%= button_to new_payment_url, :method => :get, :class => 'btn btn-med btn-primary', :method => :get do %>
-				Settle Up!
-				<%= hidden_field_tag :event_id, @event.id %>
-          		<% end %>
-				<br>
-				<h3>Your Split</h3>
-				<p><%= number_to_currency(@event.total_balance / @event.users.length)%></p>
-				<h3>You Owe</h3>
-				<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).debt)  %></p>
-				<h3>You're Owed</h3>
-				<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).credit)  %></p>
-
+			<div class="span3 payment_list">
+				<h4>Payments</h4>
+				<% @event.payments.each do |payment| %>
+				<div class="row">
+					<div class="span2">
+						<p><%= "#{payment.user.first_name} #{payment.user.last_name}" %></p>
+					</div>
+					<div class="span1">
+						<p><strong><%= number_to_currency(payment.amount)%></strong></p>
+					</div>
+				</div>	
+				<% end %>
 			</div>
 		</div>
+
+
+		
 	</div>
+	<div class="span3">
+		<h3>Event Total</h3>
+		<p><%= number_to_currency(@event.total_balance) %></p>
+		<%= button_to new_purchase_url, :method => :get, :class => 'btn btn-med btn-primary', :method => :get do %>
+		Add Purchase
+		<%= hidden_field_tag :event_id, @event.id %>
+  		<% end %>
+  		<%= button_to new_payment_url, :method => :get, :class => 'btn btn-med btn-primary', :method => :get do %>
+		Settle Up!
+		<%= hidden_field_tag :event_id, @event.id %>
+  		<% end %>
+		<br>
+		<h3>Your Split</h3>
+		<p><%= number_to_currency(@event.total_balance / @event.users.length)%></p>
+		<h3>You Owe</h3>
+		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).debt)  %></p>
+		<h3>You're Owed</h3>
+		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).credit)  %></p>
+
+	</div>
+</div>
 
 
 <%= link_to 'Back', events_path %>

@@ -1,7 +1,8 @@
+<div id="events-left">
+  
+  <h1>Listing events</h1>
 
-<h1>Listing events</h1>
-
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -22,65 +23,45 @@
         <td><%= number_to_currency(event.total_balance) %></td>
         <td><%= number_to_currency(event.find_user_event_balance(current_user.id).debt) %></td>
       
-        <% if event.purchase_closed %>
-
+        <% if event.closed == false %>
           <td>
-          <%= button_to new_payment_url, :method => :get, :class => 'btn btn-med btn-primary' do %>
-          Add Payment
-          <%= hidden_field_tag :event_id, event.id %>
-          <% end %>
+            <%= button_to new_payment_url, :method => :get, :class => 'my-btn gr-btn' do %>
+            Add Payment
+            <%= hidden_field_tag :event_id, event.id %>
+            <% end %>
           </td>
-
-
-        <% else %>
           <td>
-            <%= button_to new_purchase_url, :method => :get, :class => 'btn btn-med btn-primary' do %>
+            <%= button_to new_purchase_url, :method => :get, :class => 'my-btn gr-btn' do %>
             Add Purchase
             <%= hidden_field_tag :event_id, event.id %>
             <% end %>
           </td>
-
-          <% if event.organizer.id == current_user.id %>
-          <td>
-            <%= button_to 'Close Purchases', close_purchase_event_path(event), :method => :get, :class => 'btn btn-med btn-primary', data: {confirm: "Are you sure? This will make users unable to add any more purchases to the event!"} %>
-          </td>
-          <% end %>
-
-        <% end %>
-
-        
-
-        
-
-        <% if event.organizer.id == current_user.id %>
-          <td>
-            <%= button_to('Edit', edit_event_path(event), :class => 'btn btn-med btn-primary', :method => :get) %>
-          </td>
         <% end %>
 
         <% if event.organizer.id == current_user.id %>
           <td>
-            <%= button_to('Delete', event, :class => 'btn btn-med btn-primary', :method => :delete, data: {confirm: 'Are you sure?'} ) %>
+            <%= button_to 'Close Event', close_event_path(event), :method => :get, :class => 'btn btn-med btn-primary', data: {confirm: "Are you sure? This will make users unable to add any more purchases or payments to the event!"} %>
+          </td>
+          <td>
+            <%= button_to('Edit', edit_event_path(event), :class => 'my-btn gr-btn', :method => :get) %>
+          </td>
+          <td>
+            <%= button_to('Delete', event, :class => 'my-btn gr-btn', :method => :delete, data: {confirm: 'Are you sure?'} ) %>
           </td>
         <% end %>
-
-        <!-- For debugging -->
-<!--         <% event.user_event_balances.each do |ueb| %>
-          <td><%= ueb.user.email %></td>          
-          <td><%= ueb.debt %></td>
-          <td><%= ueb.credit %></td>
-
-          <% end %> -->
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<div>
-<%= button_to('New Event', new_event_path, :class => 'btn btn-med btn-primary', :method => :get) %>
-<%= button_to('See All Purchases', purchases_path, :class => 'btn btn-med btn-primary', :method => :get) %>
-<%= button_to('See All Payments', payments_path, :class => 'btn btn-med btn-primary', :method => :get) %>
+<div id="events-right">
+  <h2 class="my-h2" id="owe-text">You owe: <text id="total-debt"><%= number_to_currency(current_user.total_debt) %></text></h2>
+  <h2 class="my-h2" id="owed-text">You're owed: <text id="total-credit"><%= number_to_currency(current_user.total_credit) %></text></h2>
+  <%= button_to('New Event', new_event_path, :class => 'my-btn gr-btn', :method => :get) %>
+  <%= button_to('Purhcase History', purchases_path, :class => 'my-btn gr-btn', :method => :get) %>
+  <%= button_to('Payment History', payments_path, :class => 'my-btn gr-btn', :method => :get) %>
+  </div>  
 </div>
+
+
 

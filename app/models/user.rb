@@ -33,4 +33,12 @@ class User < ActiveRecord::Base
 			self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
 		end
 	end
+
+	def total_debt
+		self.user_event_balances.sum('debt')
+	end
+
+	def total_credit
+		self.user_event_balances.sum('credit')
+	end
 end
