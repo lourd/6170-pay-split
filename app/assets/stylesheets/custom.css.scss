@@ -11,3 +11,203 @@
 .event_left_sidebar {
 	background-color: #EEE;
 }
+
+#logout-text {
+	padding-top: 10px;
+	color: white;
+}
+
+.flash {
+	position: absolute;
+	left: 50%;
+	/* Centers the element*/
+	transform:translate(-50%);
+	-webkit-transform: translate(-50%);
+	width: 200px;
+	padding: 5px;
+  	margin-bottom: 10px;
+  	text-align: center;
+  	clear: both;
+}
+
+#flash_success {
+  border: 1px solid green;
+  background-color: #ae8;
+  color: green;
+}
+
+#flash_notice {
+  border: 1px solid red;
+  background-color: #ea8;
+  color: red;
+}
+
+.container {
+	clear: both;
+	border-radius: 0px;
+}
+
+.my-btn {
+	display: inline-block;
+	padding: 4px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#login-btn {
+	margin-left: 5px;
+}
+
+#signup-btn {
+	float: left;
+	margin-top: 5px;
+	width: 220px;
+}
+
+
+
+.gr-btn {
+	border: 1px solid green;
+	background-color: green;
+	color: white;
+	&:hover {
+		background-color: #2a2;
+		border-color: #2a2;
+	}
+}
+
+login form {
+	margin-bottom: 0px;
+}
+
+#landing-container {
+	width: 600px;
+	height: 200px;
+	background-color: #eee;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+
+#left-container {
+	width: 48%;
+	height: 194px;
+	margin-left: 1%; 
+	margin-right: 1%;
+	margin-top: 3px;
+	float: left;
+	background-color: green;
+	vertical-align: middle;
+	text-align: center;
+	color: white;
+}
+#right-container {
+	width: 37%;
+	height: 194px;
+	margin-left: 6%; 
+	margin-right: 7%;
+	margin-top: 44px;
+	/*background-color: blue;*/
+	float: left;
+	padding-left: -2px;
+}
+
+body, html, .container, .row {
+	height: 100%;
+	width: 100%;
+}
+
+#password-field {
+	float: left;
+	width: 135px;
+}
+
+#logo {
+	font-family: times;
+	font-size: 40pt;
+	line-height: 176px;
+}
+
+.brand {
+	color: white;
+}
+
+#events-left {
+	float: left;
+	width: 75%;
+	height: 400px;
+	padding-left: 5%;
+}
+
+#events-right {
+	background-color: #eee;
+	width: 256px;
+	position: fixed;
+	/*height: 400px;*/
+	right: 0;
+	top: 40px;
+	bottom: 0;
+	padding-top: 10px;
+	/*padding-left: 10px;*/
+
+	.my-btn {
+		width: 90%;
+		margin-left: 5%;
+		margin-right: 5%;
+		margin-bottom: -10px;
+	}
+	
+}
+
+#owe-text {
+	margin-bottom: 0px;
+}
+
+#owed-text {
+	margin-top: 0px;
+}
+
+.my-h2 {
+	margin-left: 5%;
+	font-family: arial;
+	font-size: 24px;
+	margin-right: 10%;
+}
+
+#total-debt {
+	color: red;
+	float: right;
+}
+
+#total-credit {
+	color: green;
+	float: right;
+}
+
+.my-navbar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin-bottom: 0px;
+	border-radius: 0px;
+	background-color: black;
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 40px;
+	clear: both;
+}
+
+a.brand {
+	font-family: times;
+	font-size: 24px;
+	padding-top: 10px;
+	&:hover {
+		color: white;
+		text-decoration: none;
+	}
+}

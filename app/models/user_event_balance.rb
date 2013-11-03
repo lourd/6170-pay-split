@@ -30,8 +30,9 @@ class UserEventBalance < ActiveRecord::Base
 		total_event_purchases_share - event_payments_already_made - share_covered_by_own_purchases
 	end
 
-	# Function to determine user's new credit after a purchase has been made to the event
-	def determine_new_credit_after_purchase
+	# Function to determine how much money an event owes to a person, i.e. their credit
+	# Credits are gained when a user makes a purchase
+	def determine_new_credit
 		@event = self.event
 		@user = self.user
 		num_users = @event.users.count
@@ -42,26 +43,12 @@ class UserEventBalance < ActiveRecord::Base
 				total_user_event_purchase += purchase.amount
 			end
 		end
-		# What is owed to the user
-		(((num_users - 1)*total_user_event_purchase) / num_users).round(2)
-	end
-
-	# Function to determine user's new credit after a payment has been made
-	# Only affects one user
-	# Creates a new paymentSplit to keep track of the transfer of money between users 
-	def determine_new_credit_after_payment(sender_id, payment)
-		beginning_credit = self.credit
-		new_credit = 0
-
-		# Check if a user should receive the money just paid - goes to user with highest amount of money
-		# owed to them
-		if @event.user_event_balances.order("credit DESC").first.user == @user && @event.user_event_balances.order("credit DESC").first.credit > 0
-			# Create a record of the transaction in paymentSplits
-			@user.payment_splits.create(:amount => payment, :receiver => @user, :user_id => sender_id)
-			new_credit = beginning_credit - BigDecimal(payment)
-		else
-			new_credit = beginning_credit
-		end
+		# Calculate share of users' purchases that other users need to pay back
+		# E.g. with 3 users, if User 1 makes a purchase of $30, she is owed $20
+		total_purchase_amount_owed_to_user = (((num_users - 1)*total_user_event_purchase) / num_users).round(2)
+		
+		# The new credit 
+		new_credit = total_purchase_amount_owed_to_user - self.payment_received
 		new_credit
 	end
 
@@ -70,14 +57,14 @@ class UserEventBalance < ActiveRecord::Base
 		self.update_attribute(:debt, determine_new_debt)
 	end
 
-	# Function to update the credit in the db, after purchase
-	def update_credit_after_purchase
-		self.update_attribute(:credit, determine_new_credit_after_purchase)
+	# Function to update the credit in the db
+	def update_credit
+		self.update_attribute(:credit, determine_new_credit)
 	end
 
-	# Function to update the credit in the db, after payment
-	# Takes in the user that made the payment, and the amount they paid
-	def update_credit_after_payment(sender_id, payment)
-		self.update_attribute(:credit, determine_new_credit_after_payment(sender_id, payment))
+	# Function to update payment_received in the db
+	def update_payment_received(new_payment_received)
+		self.update_attribute(:payment_received, self.payment_received + new_payment_received)
 	end
+
 end

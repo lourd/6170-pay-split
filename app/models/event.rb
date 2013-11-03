@@ -9,6 +9,7 @@ class Event < ActiveRecord::Base
 	# The total balance of an event is the total amount of purchases for that event
 	def update_total_balance
 		self.update_attribute(:total_balance, self.purchases.sum('amount'))
+		self.total_balance
 	end
 
 	# Set an event as closed so it can stop accepting purchases or payments anymore
@@ -20,4 +21,17 @@ class Event < ActiveRecord::Base
   	def find_user_event_balance(user_id)
   		self.user_event_balances.find_by_user_id(user_id)
   	end
+
+    # Method to determine the total amount paid by a user to the event
+  	def find_total_payments_made_by_user(user_id)
+  		sum = 0
+  		if !self.payments.find_all_by_user_id(user_id).nil?
+  			self.payments.find_all_by_user_id(user_id).each do |payment|
+  				sum += payment.amount
+  			end
+  		end
+  		sum
+  	end
 end
+
+

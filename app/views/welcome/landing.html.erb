@@ -1,19 +1,20 @@
-
-
-
-<html>
-<h1 class="centerize">Welcome to PaymentSplit!</h1>
-
-<br>
-<body>
-
-	<div class="centerize" style="float:center;">
-		<%= button_to('View events', events_path, :class => 'btn btn-large btn-primary', :method => :get) %>
+<div id="landing-container">
+	<div id="left-container">
+			<h2 id="logo">Split-Pay</h2>
 	</div>
+	<div id="right-container">
+	<login>
+		<%= form_tag sessions_path do %>
+		<%= text_field_tag :email, params[:email], placeholder: "Email address" %>
+		<%= password_field_tag :password, nil, placeholder: "Password", :id => 'password-field' %>
+		<%= submit_tag "Log in", :class => 'my-btn gr-btn', :id => 'login-btn'%>
+		<% end %>
 
-	<div class="centerize" style="float:center;">
-		<%= button_to('Create events', new_event_path, :class => 'btn btn-large btn-primary', :method => :get) %>
+		<%= button_to('Sign up', sign_up_path, :class => 'my-btn gr-btn', :id => 'signup-btn', :method => :get) %>
+		
+	</login>
 	</div>
+</div>
 
-</body>
-</html>
+
+	

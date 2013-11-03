@@ -50,7 +50,7 @@ class PurchasesController < ApplicationController
           # Update all user_event_balances
           @purchase.event.user_event_balances.each do |ueb|
             ueb.update_debt
-            ueb.update_credit_after_purchase
+            ueb.update_credit
           end
 
           format.html { redirect_to @event, notice: 'Purchase was successfully created.' }
@@ -68,6 +68,8 @@ class PurchasesController < ApplicationController
   def update
     respond_to do |format|
       if @purchase.update(purchase_params)
+        @event.update_total_balance
+
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,11 +82,14 @@ class PurchasesController < ApplicationController
   # DELETE /purchases/1
   # DELETE /purchases/1.json
   def destroy
+
     @purchase.destroy
     respond_to do |format|
+
       format.html { redirect_to purchases_url }
       format.json { head :no_content }
     end
+
   end
 
   private
