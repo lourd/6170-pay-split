@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 AtoFirstEvent:
-  amount: 10
-  description: AtoFirst
   user: A
   event: FirstEvent
 
 BtoFirstEvent:
-  amount: 2
-  description: BtoFirst
   user: B
+  event: FirstEvent
+
+CtoFirstEvent:
+  user: C
   event: FirstEvent
