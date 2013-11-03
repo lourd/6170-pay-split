@@ -42,7 +42,7 @@ class PurchasesController < ApplicationController
           ueb.update_credit
         end
 
-        format.html { redirect_to @event, notice: 'Purchase was successfully created.' }
+        format.html { redirect_to @event, success: 'Purchase was successfully created.' }
         format.json { render action: 'show', status: :created, location: @purchase }
       else
         format.html { render action: 'new' }
@@ -58,7 +58,7 @@ class PurchasesController < ApplicationController
       if @purchase.update(purchase_params)
         @event.update_total_balance
 
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
+        format.html { redirect_to @purchase, success: 'Purchase was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

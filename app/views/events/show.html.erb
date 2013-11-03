@@ -22,9 +22,11 @@
 <div id="events-show-middle">
 	<h2 id="event-title">
 		<%= @event.name %>
+		<% if @event.organizer.id == current_user.id %>
 		<%= link_to edit_event_path(@event), :method => :get, :title => "Edit event" do %>
               <i class="fa fa-edit"></i>
               <% end %>
+        <% end %>
 	</h2>
 	<p class="event-description"><%= @event.description %></p>
 
