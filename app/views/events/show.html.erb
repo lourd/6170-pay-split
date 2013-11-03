@@ -80,8 +80,10 @@
 		<%= hidden_field_tag :event_id, @event.id %>
 		<% end %>
 
-		<%= button_to close_event_path(@event), :method => :get, :title => "Close event", :class => 'my-btn gr-btn', data: {confirm: "Are you sure? This will make users unable to add any more purchases or payments to the event!"} do %>
-        Close event      
+		<% if current_user.id == @event.organizer.id %>
+			<%= button_to close_event_path(@event), :method => :get, :title => "Close event", :class => 'my-btn gr-btn', data: {confirm: "Are you sure? This will make users unable to add any more purchases or payments to the event!"} do %>
+	        Close event      
+	        <% end %>
         <% end %>
 	<% end %>
 
