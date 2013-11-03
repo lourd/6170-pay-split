@@ -1,4 +1,6 @@
 class Purchase < ActiveRecord::Base
+	MAX_PURCHASE_AMOUNT = 250
+
 	belongs_to :user
 	belongs_to :event
 
@@ -16,7 +18,7 @@ class Purchase < ActiveRecord::Base
 	end
 	# Do not allow users to add purchases with negative amount
 	def validate_amount
-		unless self.amount > 0
+		unless self.amount > 0 and self.amount <= MAX_PURCHASE_AMOUNT
 			self.errors.add(:amount, 'must be positive')
 		end
 	end
