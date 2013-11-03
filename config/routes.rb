@@ -1,5 +1,4 @@
 DeborahcGcosmin0LourdProj3::Application.routes.draw do
-  get "welcome/landing"
   resources :users
   resources :sessions
   resources :events
@@ -9,10 +8,11 @@ DeborahcGcosmin0LourdProj3::Application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
+  get "landing_page" => "welcome#landing", :as => "landing_page"
 
   get 'events/:id/close_event' => 'events#close_event', :as => 'close_event'
 
-  root :to => "welcome#landing"
+  root :to => "events#index"
 
   #unless Rails.application.config.consider_all_requests_local
     get '/404' =>'errors#not_found'
