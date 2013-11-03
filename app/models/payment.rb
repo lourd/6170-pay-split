@@ -29,21 +29,21 @@ class Payment < ActiveRecord::Base
 		end
 	end
 
-	# This should go under event
-	def find_user_event_balances_with_credit_exclude_sender(sender_id)
-		self.event.user_event_balances.where.not(user_id: sender_id).where('credit > 0').order("credit DESC")
-	end
-
 	def distribute_payment(sender_id, payment)
 		@event = self.event
 		@user = self.user
+
 		# Convert string to BigDecimal for comparison
 		payment = BigDecimal(payment)
-		user_event_balances_with_credit = find_user_event_balances_with_credit_exclude_sender(sender_id)
 
 		# Distribute payment across all user_event_balances with positive credit (i.e. people who are owed money)
-		user_event_balances_with_credit.each do |ueb|
-			#End when there is no more money to distribute
+		#self.event.user_event_balances.each do |ueb|
+		self.event.user_event_balances.each do |ueb|
+			if ueb.user_id == @user.id or ueb.credit <= 0
+				next
+			end
+
+     		#End when there is no more money to distribute
 			if payment <= 0
 				break
 			end
