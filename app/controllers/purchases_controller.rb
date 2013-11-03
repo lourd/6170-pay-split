@@ -18,16 +18,8 @@ class PurchasesController < ApplicationController
   # GET /purchases/new
   def new
     @purchase = Purchase.new
-    if Event.exists?(params[:event_id])
-      @event = Event.find(params[:event_id])
-      if current_user.events.exists?(@event.id)
-        @pre_selected_event = @event.id
-      else
-        @pre_selected_event = 0
-      end
-    else
-      @pre_selected_event = 0
-    end
+
+    @pre_selected_event = get_event_id_from_param(params[:event_id])
   end
 
   # GET /purchases/1/edit
@@ -39,7 +31,7 @@ class PurchasesController < ApplicationController
   def create
     event_id = purchase_params[:event_id]
     @event = Event.find(event_id)
-      @purchase = Purchase.new(purchase_params)
+    @purchase = Purchase.new(purchase_params)
 
     respond_to do |format|
       if @purchase.save
