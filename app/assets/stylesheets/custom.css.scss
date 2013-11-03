@@ -1,7 +1,5 @@
-@import "bootstrap";
-
-.event_name {
-	
+body {
+	padding-top: 40px;
 }
 
 .event_description {
@@ -50,11 +48,15 @@
 .my-btn {
 	display: inline-block;
 	padding: 4px 12px;
-	margin-bottom: 0;
+	margin-bottom: 0px;
 	font-size: 14px;
 	line-height: 20px;
 	text-align: center;
 	vertical-align: middle;
+}
+
+.button-to {
+	margin-bottom: 0px;
 }
 
 #login-btn {
@@ -138,9 +140,11 @@ body, html, .container, .row {
 
 #events-left {
 	float: left;
-	width: 75%;
+	/*width: 75%;*/
 	height: 400px;
 	padding-left: 5%;
+	padding-right: 5%;
+	padding-top: 10px;
 }
 
 #events-right {
@@ -151,14 +155,18 @@ body, html, .container, .row {
 	right: 0;
 	top: 40px;
 	bottom: 0;
-	padding-top: 10px;
+	padding-top: 0px;
 	/*padding-left: 10px;*/
 
 	.my-btn {
 		width: 90%;
 		margin-left: 5%;
 		margin-right: 5%;
-		margin-bottom: -10px;
+		margin-bottom: 0px;
+	}
+
+	form {
+		margin-bottom: 7px;
 	}
 	
 }
@@ -174,7 +182,7 @@ body, html, .container, .row {
 .my-h2 {
 	margin-left: 5%;
 	font-family: arial;
-	font-size: 24px;
+	font-size: 20px;
 	margin-right: 10%;
 }
 
@@ -210,4 +218,80 @@ a.brand {
 		color: white;
 		text-decoration: none;
 	}
+}
+
+th {
+	font-family: helvetica;
+	font-size: 12px;
+}
+
+.description {
+	color: gray;
+	font-family: helvetica;
+	font-size: 10px;
+}
+
+.event-name {
+	font-size: 16px;
+	width: 200px;
+}
+
+.event-table {
+	form {
+		/*margin-bottom: 0px;*/
+	}
+
+	.button_to {
+		width: 20px;
+		height: 20px;
+		margin: 0px;
+		margin-right: 5px;
+	}
+	tr {
+		max-width: 400px;
+		min-width: 200px;
+	}
+	td {
+		padding: 3px;
+		vertical-align: middle;
+	}
+
+	.event-row-text {
+		padding-top: 5px;
+		text-align: right;
+		width: 99%;
+		p {
+			vertical-align: middle;
+		}
+			font-size: 18px;
+	}
+
+	.event-row-actions {
+		a {
+			color: green;
+			&:hover{
+				text-decoration: none;
+			}
+
+			i {
+				&:hover {
+					color: #2a2;
+				}
+			}
+		}
+	}
+}
+
+.debt-text {
+	color: red;
+}
+
+.credit-text {
+	color: green;
+}
+
+
+
+.table {
+	width: 600px;
 }
