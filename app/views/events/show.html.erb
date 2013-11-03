@@ -1,4 +1,41 @@
-<div class="row">
+<div id="events-show-left">
+	<table class="table member-table">
+		<thead>
+			<tr>
+				<th>Members</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @event.users.each do |user| %>
+				<tr>
+					<td class="member-name"><%="#{user.first_name} #{user.last_name}"%></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div id="events-show-middle">
+	<h2 id="event-title">
+		<%= @event.name %>
+		<%= link_to edit_event_path(@event), :method => :get, :title => "Edit event" do %>
+              <i class="fa fa-edit"></i>
+              <% end %>
+	</h2>
+	<p class="event-description"><%= @event.description %></p>
+</div>
+<div id="events-right">
+	<h2 class="my-h2" id="total-text">Event total: <text id="total-amount"><%= number_to_currency(@event.total_balance) %></text></h2>
+	<h2 class="my-h2" id="total-text">Your split: <text id="total-amount"><%= number_to_currency(@event.total_balance / @event.users.length)%></text></h2>
+  <h2 class="my-h2" id="owe-text">You owe: <text id="total-debt"><%= number_to_currency(@event.find_user_event_balance(current_user.id).debt) %></text></h2>
+  <h2 class="my-h2" id="owed-text">You're owed: <text id="total-credit"><%= number_to_currency(@event.find_user_event_balance(current_user.id).credit) %></text></h2>
+
+  <%= button_to('Add Purchase', new_purchase_url(@event), :class => 'my-btn gr-btn', :method => :get) %>
+
+  <%= button_to('Pay up!', new_payment_url(@event), :class => 'my-btn gr-btn', :method => :get) %>
+
+</div>  
+
+<!-- <div class="row">
 	<div class="span2 event_left_sidebar">
 		<%= button_to('Edit Event', edit_event_path(@event), :class => 'btn btn-med btn-primary', :method => :get) %>
 		<h3>Organizer:</h3>
@@ -70,10 +107,9 @@
 		<p><%= number_to_currency(@event.find_total_payments_made_by_user(current_user.id))  %></p>
 		<h3>For debugging:You've received</h3>
 		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).payment_received)  %></p>
-<!--  -->
 	</div>
 </div>
 
 
-<%= link_to 'Back', events_path %>
+<%= link_to 'Back', events_path %> -->
 
