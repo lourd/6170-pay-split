@@ -1,5 +1,8 @@
-<h1>New payment</h1>
+<%= button_to events_path, :class => 'my-btn gr-btn back-btn', :method => :get do %>
+		Back
+	<% end %>
+<div class="new-pay-container">
 
-<%= render 'form' %>
-
-<%= link_to 'Back', payments_path %>
+	<h1>New payment</h1>
+	<%= render 'form' %>
+</div>
