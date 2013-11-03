@@ -1,4 +1,7 @@
 <div id="events-show-left">
+	<%= button_to events_path, :class => 'my-btn gr-btn', :method => :get do %>
+	Back to all events
+	<% end %>
 	<h3 class="organizer-text">Organizer</h3>
 	<p><%= "#{@event.organizer.first_name} #{@event.organizer.last_name}" %></p>
 	<table class="table member-table">
@@ -64,64 +67,21 @@
   <h2 class="my-h2" id="owe-text">You owe: <text id="total-debt"><%= number_to_currency(@event.find_user_event_balance(current_user.id).debt) %></text></h2>
   <h2 class="my-h2" id="owed-text">You're owed: <text id="total-credit"><%= number_to_currency(@event.find_user_event_balance(current_user.id).credit) %></text></h2>
 
-  <%= button_to('Add Purchase', new_purchase_url(@event), :class => 'my-btn gr-btn', :method => :get) %>
+  <%= button_to new_purchase_url, :class => 'my-btn gr-btn', :method => :get do %>
+  Add Purchase
+  <%= hidden_field_tag :event_id, @event.id %>
+  <% end %>
 
-  <%= button_to('Pay up!', new_payment_url(@event), :class => 'my-btn gr-btn', :method => :get) %>
+  <%= button_to new_payment_url(@event), :class => 'my-btn gr-btn', :method => :get do %>
+  Pay up!
+   <%= hidden_field_tag :event_id, @event.id %>
+   <% end %>
+
+   <% if current_user.id == @event.organizer.id %>
+	<%= button_to event_path, :method => :delete, :class => 'my-btn gr-btn', :title => "Delete event", data: {confirm: 'Are you sure you want to delete this event?'} do %>
+		Delete event
+    <% end %>
+   <% end %>
 
 </div>  
-
-<!-- <div class="row">
-	<div class="span2 event_left_sidebar">
-		<%= button_to('Edit Event', edit_event_path(@event), :class => 'btn btn-med btn-primary', :method => :get) %>
-		<h3>Organizer:</h3>
-		<h4><%= @event.organizer.first_name %></h4>
-		<h3>Members</h3>
-		<% @event.users.each do |user|  %>
-		<p><%="#{user.first_name} #{user.last_name}"%></p>
-		<% end %>
-	</div>
-	<div class="span7">
-		<p class="event_name">
-		  <h2><%= @event.name %></strong></h2>	
-		</p>
-
-		<p class="event_description">
-		  <%= @event.description %>
-		</p>
-		<div class="row">
-			<div class="span3 purchase_list">
-				<h4>Purchases</h4>
-				<% @event.purchases.each do |purchase| %>
-				<div class="row">
-					<div class="span2">
-						<p><%= purchase.description %></p>
-					</div>
-					<div class="span1">
-						<p><strong><%= number_to_currency(purchase.amount)%></strong></p>
-					</div>
-				</div>
-				<% end %>
-			</div>
-			<div class="span3 payment_list">
-				<h4>Payments</h4>
-				<% @event.payments.each do |payment| %>
-				<div class="row">
-					<div class="span2">
-						<p><%= "#{payment.user.first_name} #{payment.user.last_name}" %></p>
-					</div>
-					<div class="span1">
-						<p><strong><%= number_to_currency(payment.amount)%></strong></p>
-					</div>
-				</div>	
-				<% end %>
-			</div>
-		</div>
-
-
-		
-	</div>
-</div>
-
-
-<%= link_to 'Back', events_path %> -->
 
