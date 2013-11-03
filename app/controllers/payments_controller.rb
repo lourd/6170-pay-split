@@ -43,7 +43,7 @@ class PaymentsController < ApplicationController
           # Distribute payment made by the sender
           ueb.update_credit
         end
-        format.html { redirect_to @event, notice: 'Payment was successfully created.' }
+        format.html { redirect_to @event, success: 'Payment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @payment }
       else
         format.html { render action: 'new' }
@@ -57,7 +57,7 @@ class PaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @payment.update(payment_params)
-        format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
+        format.html { redirect_to @payment, success: 'Payment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
