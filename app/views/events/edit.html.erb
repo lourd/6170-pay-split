@@ -1,6 +1,14 @@
-<h1>Editing event</h1>
+<div class="back-buttons">
+	<%= button_to @event, :class => 'my-btn gr-btn back-btn', :method => :get do %>
+		Back to event
+	<% end %>
 
-<%= render 'form' %>
+	<%= button_to events_path, :class => 'my-btn gr-btn back-btn', :method => :get do %>
+		All events
+	<% end %>
+</div>
 
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+<div class="new-event-container">
+	<h1>Editing event</h1>
+	<%= render 'form' %>
+</div>

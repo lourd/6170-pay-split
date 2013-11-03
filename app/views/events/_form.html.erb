@@ -11,25 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
+    <%= f.text_field :name, :placeholder => "Event name" %>
+    <%= f.text_area :description, :placeholder => "Description of the event"%>
   <% if @event.new_record? %>
     <%= fields_for(@user_event_balance) do |usb| %>
-      <div class="field">
         <%= usb.label "Choose users participating in the event (choose multiple with ctrl+click)" %> <br />
         <%= collection_select(:users, :id, User.find(:all, :conditions => ["id != ?", current_user.id]), :id, :email, {}, {:multiple => true, :size => 10, class:"chzn-select medium"}) %>
-
-      </div>
     <% end %>
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "my-btn gr-btn"%>
   </div>
 <% end %>
