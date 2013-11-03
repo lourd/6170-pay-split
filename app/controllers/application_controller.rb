@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
 
 	def require_login
 		unless current_user
-			#flash[:error] = "You must be logged in to access this section"
 			redirect_to landing_page_path
 		end
 	end
@@ -34,8 +33,8 @@ class ApplicationController < ActionController::Base
 
 
 	#unless Rails.application.config.consider_all_requests_local
-		#rescue_from Exception, with: lambda { |exception| render_error 500, exception }
-		#rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+		rescue_from Exception, with: lambda { |exception| render_error 500, exception }
+		rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
 	#end
 
 	private
