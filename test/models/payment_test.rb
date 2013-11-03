@@ -71,4 +71,8 @@ class PaymentTest < ActiveSupport::TestCase
 
  	  assert_equal false, payment.valid?
   end
+
+  test "distribute payments correctly" do
+    
+  end
 end
