@@ -1,8 +1,6 @@
-<div id="header">
+<div class="signup-container">
   <h1>Sign Up</h1>
-</div>
 
-<div id="content">
   <%= form_for @user do |f| %>
     <% if @user.errors.any? %>
       <div class="error_messages">
@@ -14,33 +12,12 @@
         </ul>
       </div>
     <% end %>
-    <h3>
-    <p>
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name %>
-    </p>
-    <p>
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
-    </p>
-    <p>
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
-    </p>
-    <p>
-      <%= f.label :password %><br />
-      <%= f.password_field :password %>
-    </p>
-    <p>
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation %>
-    </p>
-    <p>
-      <%= f.label :venmo_account %><br />
-      <%= f.text_field :venmo_account %>
-    </p>
-    </h3>
-    <p class="button"><%= f.submit %></p>
+      <%= f.text_field :first_name, placeholder: "First name" %>
+      <%= f.text_field :last_name, placeholder: "Last name" %>
+      <%= f.text_field :email, placeholder: "Email address" %>
+      <%= f.password_field :password, placeholder: "Password" %>
+      <%= f.password_field :password_confirmation, placeholder: "Confirm password" %>
+      <%= f.text_field :venmo_account, placeholder: "Venmo account" %>
+    <%= f.submit :class => "my-btn gr-btn" %>
   <% end %>
-
 </div>
