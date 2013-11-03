@@ -14,14 +14,12 @@
         <td class="event-row-actions">
           <% if event.closed == false %>
           
-            <%= link_to new_payment_url, :method => :get, :title => "Add payment" do %>
+            <%= link_to new_payment_url + "?event_id=" + event.id.to_s(), :method => :get, :title => "Add payment" do %>
             <i class="fa fa-money fa-2x"></i>
-            <%= hidden_field_tag :event_id, event.id %>
             <% end %>
 
-            <%= link_to new_purchase_url, :method => :get, :title => "Add purchase" do %>
+            <%= link_to new_purchase_url + "?event_id=" + event.id.to_s(), :method => :get, :title => "Add purchase" do %>
             <i class="fa fa-shopping-cart fa-2x"></i>
-            <%= hidden_field_tag :event_id, event.id %>
             <% end %>
             
           <% end %>
