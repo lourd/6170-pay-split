@@ -73,6 +73,12 @@ class PaymentTest < ActiveSupport::TestCase
   end
 
   test "distribute payments correctly" do
+    event = events(:FirstEvent)
+    user = users(:B)
+    Purchase.create(:amount => 6, :description => "test",
+      :event_id => event.id, :user_id => user.id)
+
+    payment = Payment.create(:amount => )
     
   end
 end

@@ -18,16 +18,8 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @payment = Payment.new
-    if Event.exists?(params[:event_id])
-      @event = Event.find(params[:event_id])
-      if current_user.events.exists?(@event.id)
-        @pre_selected_event = @event.id
-      else
-        @pre_selected_event = 0
-      end
-    else
-      @pre_selected_event = 0
-    end
+
+    @pre_selected_event = get_event_id_from_param(params[:event_id])
   end
 
   # GET /payments/1/edit
