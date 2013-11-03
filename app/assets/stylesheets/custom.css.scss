@@ -104,7 +104,7 @@ login form {
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 50px;
+	margin-top: 20px;
 	text-align: center;
 	padding-bottom: 5px;
 	h1 {
@@ -407,4 +407,32 @@ th {
 	font-size: 20px;
 	font-family: helvetica;
 	margin-bottom: 0px;
+}
+
+.new-pay-container {
+	width: 300px;
+	/*background-color: #eee;*/
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	text-align: center;
+	padding-bottom: 5px;
+	h1 {
+		font-size: 40px;
+		font-family: helvetica;
+	}
+	form {
+		margin-bottom: 0px;
+	}
+
+	.my-btn {
+		width: 74%;
+	}
+}
+
+.back-btn {
+	position: fixed;
+	top: 50px;
+	left: 20px;
 }
