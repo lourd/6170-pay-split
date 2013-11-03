@@ -237,6 +237,7 @@ body, html, .container, .row {
 	padding-right: 20px;
 	height: 40px;
 	clear: both;
+	z-index: 1;
 }
 
 a.brand {
@@ -410,7 +411,6 @@ th {
 }
 
 .new-pay-container {
-	z-index: -1;
 	width: 300px;
 	/*background-color: #eee;*/
 	position: relative;
@@ -446,7 +446,6 @@ th {
 }
 
 .new-purchase-container {
-	z-index: -1;
 	width: 300px;
 	/*background-color: #eee;*/
 	position: relative;
@@ -469,7 +468,6 @@ th {
 }
 
 .new-event-container {
-	z-index: -1;
 	width: 300px;
 	/*background-color: #eee;*/
 	position: relative;
