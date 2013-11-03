@@ -122,7 +122,7 @@ class UserEventBalanceTest < ActiveSupport::TestCase
   	assert_equal 2, after - before
   end
 
-  test "determine new credit correctly after some else purchases" do
+  test "determine new credit correctly after someone else purchases" do
   	event = events(:FirstEvent)
   	user = users(:A)
 
