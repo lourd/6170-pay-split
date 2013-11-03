@@ -410,6 +410,7 @@ th {
 }
 
 .new-pay-container {
+	z-index: -1;
 	width: 300px;
 	/*background-color: #eee;*/
 	position: relative;
@@ -431,13 +432,44 @@ th {
 	}
 }
 
-.back-btn {
-	position: fixed;
-	top: 50px;
-	left: 20px;
+.back-buttons {
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	form {
+		margin-bottom: 0px;
+	}
+	.back-btn {
+		margin-bottom: 5px;
+		width: 120px;
+	}
 }
 
 .new-purchase-container {
+	z-index: -1;
+	width: 300px;
+	/*background-color: #eee;*/
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	text-align: center;
+	padding-bottom: 5px;
+	h1 {
+		font-size: 40px;
+		font-family: helvetica;
+	}
+	form {
+		margin-bottom: 0px;
+	}
+
+	.my-btn {
+		width: 74%;
+	}
+}
+
+.new-event-container {
+	z-index: -1;
 	width: 300px;
 	/*background-color: #eee;*/
 	position: relative;
