@@ -10,15 +10,6 @@ class PurchaseTest < ActiveSupport::TestCase
  	assert_equal true, purchase.valid?
   end
 
-  test "does not save without description" do
-  	event = events(:FirstEvent)
-  	user = users(:A)
- 	purchase = Purchase.new(:amount => 3, :description => "",
-  		:event_id => event.id, :user_id => user.id)
-
- 	assert_equal false, purchase.valid?
-  end
-
   test "does not save if event 0 selected (no event)" do
   	event = events(:FirstEvent)
   	user = users(:A)

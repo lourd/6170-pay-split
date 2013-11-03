@@ -2,7 +2,6 @@ class Payment < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :event
 
-	validates :description, :presence => true
 	validates :amount, :presence => true
 
 	validate :validate_event_selection

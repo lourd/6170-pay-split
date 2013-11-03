@@ -11,16 +11,6 @@ class PaymentTest < ActiveSupport::TestCase
    	assert_equal true, payment.valid?
   end
 
-  test "does not save without description" do
-  	event = events(:FirstEvent)
-  	user = users(:A)
-  	event.user_event_balances.find_by_user_id(user.id).update_attribute(:debt, 5)
- 	  payment = Payment.new(:amount => 3, :description => "",
-  		:event_id => event.id, :user_id => user.id)
-
-   	assert_equal false, payment.valid?
-  end
-
   test "does not save if event 0 selected (no event)" do
   	event = events(:FirstEvent)
   	user = users(:A)
