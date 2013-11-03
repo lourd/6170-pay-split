@@ -39,26 +39,22 @@ class PurchasesController < ApplicationController
   def create
     event_id = purchase_params[:event_id]
     @event = Event.find(event_id)
-    if @event.closed == true
-      redirect_to :back, notice: 'You can\'t add anymore purchases to this event.'
-    else
       @purchase = Purchase.new(purchase_params)
 
-      respond_to do |format|
-        if @purchase.save
-          @event.update_total_balance
-          # Update all user_event_balances
-          @purchase.event.user_event_balances.each do |ueb|
-            ueb.update_debt
-            ueb.update_credit
-          end
-
-          format.html { redirect_to @event, notice: 'Purchase was successfully created.' }
-          format.json { render action: 'show', status: :created, location: @purchase }
-        else
-          format.html { render action: 'new' }
-          format.json { render json: @purchase.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if @purchase.save
+        @event.update_total_balance
+        # Update all user_event_balances
+        @purchase.event.user_event_balances.each do |ueb|
+          ueb.update_debt
+          ueb.update_credit
         end
+
+        format.html { redirect_to @event, notice: 'Purchase was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @purchase }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
     end
   end

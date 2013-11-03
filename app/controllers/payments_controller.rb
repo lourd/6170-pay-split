@@ -39,27 +39,23 @@ class PaymentsController < ApplicationController
   def create
     event_id = payment_params[:event_id]
     @event = Event.find(event_id)
-    if @event.closed == true
-      redirect_to :back, notice: 'The event is closed. You can no longer make payments to this event.'
-    else
-      @payment = Payment.new(payment_params)
 
-      respond_to do |format|
-        if @payment.save
-          # Distribute payment among users
-          @payment.distribute_payment(payment_params[:user_id], payment_params[:amount])
-          @payment.event.user_event_balances.each do |ueb|
-            ueb.update_debt
-            # Distribute payment made by the sender
-            ueb.update_credit
-            #ueb.update_credit_after_payment(payment_params[:user_id], payment_params[:amount])
-          end
-          format.html { redirect_to @event, notice: 'Payment was successfully created.' }
-          format.json { render action: 'show', status: :created, location: @payment }
-        else
-          format.html { render action: 'new' }
-          format.json { render json: @payment.errors, status: :unprocessable_entity }
+    @payment = Payment.new(payment_params)
+
+    respond_to do |format|
+      if @payment.save
+        # Distribute payment among users
+        @payment.distribute_payment(payment_params[:user_id], payment_params[:amount])
+        @payment.event.user_event_balances.each do |ueb|
+          ueb.update_debt
+          # Distribute payment made by the sender
+          ueb.update_credit
         end
+        format.html { redirect_to @event, notice: 'Payment was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @payment }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
   end

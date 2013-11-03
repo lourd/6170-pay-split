@@ -3,11 +3,20 @@
 AtoFirstEvent:
   user: A
   event: FirstEvent
+  debt: 0
+  credit: 0
+  payment_received: 0
 
 BtoFirstEvent:
   user: B
   event: FirstEvent
+  debt: 0
+  credit: 0
+  payment_received: 0
 
 CtoFirstEvent:
   user: C
   event: FirstEvent
+  debt: 0
+  credit: 0
+  payment_received: 0

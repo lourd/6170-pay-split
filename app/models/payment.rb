@@ -7,6 +7,7 @@ class Payment < ActiveRecord::Base
 
 	validate :validate_event_selection
 	validate :validate_amount
+	validate :validate_event_not_closed
 
 	# Function to make sure a payment is attached to an event
 	def validate_event_selection
@@ -17,9 +18,15 @@ class Payment < ActiveRecord::Base
 
 	# Function to ensure that user can only pay exactly what they owe to an event
 	def validate_amount
-		unless self.amount and self.amount > 0 and self.amount <= self.event.user_event_balances.find_by_user_id(self.user.id).debt
+		unless self.amount and self.amount > 0 and self.event and self.amount <= self.event.user_event_balances.find_by_user_id(self.user.id).debt
 			self.errors.add(:amount, 'You can only pay at most the amount you owe!')
 
+		end
+	end
+
+	def validate_event_not_closed
+		unless self.event and self.event.closed == false
+			self.errors.add(:event, 'must not be closed to add payment!')
 		end
 	end
 

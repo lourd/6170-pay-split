@@ -65,4 +65,34 @@ class UserTest < ActiveSupport::TestCase
 
    	assert_equal user.password_hash, BCrypt::Engine.hash_secret("test", user.password_salt)
   end
+
+  test "correctly computes total debt for event" do
+    event = events(:FirstEvent)
+    user = users(:C)
+    userB = users(:A)
+
+    before = user.total_debt
+
+    Purchase.create(:amount => 4, :description => "test", :user_id => userB.id, :event_id => event.id)
+    Purchase.create(:amount => 8, :description => "test", :user_id => userB.id, :event_id => event.id)
+    Payment.create(:amount => 2, :description => "test", :user_id => user.id, :event_id => event.id)
+
+    after = user.total_debt
+
+    assert_equal 2.00, after - before
+  end
+
+  test "correctly computes total credit for event" do
+    event = events(:FirstEvent)
+    user = users(:A)
+
+    before = user.total_credit
+
+    Purchase.create(:amount => 4, :description => "test", :user_id => user.id, :event_id => event.id)
+    Purchase.create(:amount => 8, :description => "test", :user_id => user.id, :event_id => event.id)
+
+    after = user.total_credit
+
+    assert_equal 8.00, after - before
+  end
 end

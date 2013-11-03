@@ -6,9 +6,3 @@ FirstEvent:
   total_balance: 0.00
   organizer: A
   closed: false
-
-SecondEvent:
-  name: second
-  description: second
-  total_balance: 0.00
-  organizer: B

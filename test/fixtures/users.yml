@@ -23,14 +23,3 @@ C:
   password_hash: testC
   password_salt: testC
   venmo_account: testC
-
-D:
-  first_name: D
-  last_name: D
-  email: d@test.com
-  password_hash: testD
-  password_salt: testD
-  venmo_account: testD
-
-
-
