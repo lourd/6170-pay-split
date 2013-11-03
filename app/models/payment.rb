@@ -23,6 +23,7 @@ class Payment < ActiveRecord::Base
 		end
 	end
 
+	# Don't add payments if event is closed
 	def validate_event_not_closed
 		unless self.event and self.event.closed == false
 			self.errors.add(:event, 'must not be closed to add payment!')
