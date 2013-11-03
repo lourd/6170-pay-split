@@ -297,22 +297,26 @@ th {
 	color: green;
 }
 
-.table {
+.event-table {
 	width: 600px;
 }
 
 #events-show-left {
-	float: left;
 	width: 200px;
+	position: fixed;
+	top: 40px;
 	bottom: 0;
 	/*height: auto;*/
 	padding-left: 2%;
 	padding-top: 20px;
+	padding-left: 20px;
 }
 
 .member-table {
 	th {
 		font-size: 20px;
+		text-align: left;
+		padding-left: 0px;
 	}
 	width: 100px;
 	td {
@@ -320,11 +324,13 @@ th {
 		vertical-align: middle;
 		text-align: center;
 		border-top: none;
+		padding-left: 0px;
 	}
 }
 
 #events-show-middle {
 	padding-top: 20px;
+	padding-left: 210px;
 }
 
 #event-title {
@@ -335,4 +341,51 @@ th {
 			text-decoration: none;
 		}
 	}
+}
+
+.purchase-table {
+	float: left;
+	width: 360px;
+	th {
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	td {
+		width: 120px;
+		font-size: 13px;
+	}
+
+	.p-amount {
+		text-align: right;
+	}
+}
+
+.payment-table {
+	margin-left: 5px;
+	width: 300px;
+	th {
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	td {
+		width: 120px;
+		font-size: 13px;
+	}
+
+	.p-amount {
+		text-align: right;
+	}
+
+}
+
+.p-amount {
+	text-align: right;
+}
+
+.organizer-text {
+	font-size: 20px;
+	font-family: helvetica;
+	margin-bottom: 0px;
 }

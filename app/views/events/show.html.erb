@@ -1,4 +1,6 @@
 <div id="events-show-left">
+	<h3 class="organizer-text">Organizer</h3>
+	<p><%= "#{@event.organizer.first_name} #{@event.organizer.last_name}" %></p>
 	<table class="table member-table">
 		<thead>
 			<tr>
@@ -22,6 +24,39 @@
               <% end %>
 	</h2>
 	<p class="event-description"><%= @event.description %></p>
+
+	<table class="table purchase-table">
+		<thead>
+			<tr>
+				<th>Purchases</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @event.purchases.each do |purchase| %>
+			<tr>
+				<td><%= purchase.description  %></td>
+				<td><%= "#{purchase.user.first_name} #{purchase.user.last_name}" %></td>
+				<td class="p-amount"><%=number_to_currency(purchase.amount) %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<table class="table payment-table">
+		<thead>
+			<tr>
+				<th>Payments</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @event.payments.each do |payment| %>
+			<tr>
+				<td><%= payment.description%></td>
+				<td><%= "#{payment.user.first_name} #{payment.user.last_name}" %></td>
+				<td class="p-amount"><%= payment.amount%></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
 </div>
 <div id="events-right">
 	<h2 class="my-h2" id="total-text">Event total: <text id="total-amount"><%= number_to_currency(@event.total_balance) %></text></h2>
@@ -84,29 +119,6 @@
 
 
 		
-	</div>
-	<div class="span3">
-		<h3>Event Total</h3>
-		<p><%= number_to_currency(@event.total_balance) %></p>
-		<%= button_to new_purchase_url, :method => :get, :class => 'btn btn-med btn-primary', :method => :get do %>
-		Add Purchase
-		<%= hidden_field_tag :event_id, @event.id %>
-  		<% end %>
-  		<%= button_to new_payment_url, :method => :get, :class => 'btn btn-med btn-primary', :method => :get do %>
-		Settle Up!
-		<%= hidden_field_tag :event_id, @event.id %>
-  		<% end %>
-		<br>
-		<h3>Your Split</h3>
-		<p><%= number_to_currency(@event.total_balance / @event.users.length)%></p>
-		<h3>You Owe</h3>
-		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).debt)  %></p>
-		<h3>You're Owed</h3>
-		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).credit)  %></p>
-		<h3>For debugging: You've Paid</h3>
-		<p><%= number_to_currency(@event.find_total_payments_made_by_user(current_user.id))  %></p>
-		<h3>For debugging:You've received</h3>
-		<p><%= number_to_currency(@event.find_user_event_balance(current_user.id).payment_received)  %></p>
 	</div>
 </div>
 
