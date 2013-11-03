@@ -28,6 +28,7 @@
               <% end %>
         <% end %>
 	</h2>
+
 	<p class="event-description"><%= @event.description %></p>
 
 	<table class="table purchase-table">
@@ -64,6 +65,9 @@
 	</table>
 </div>
 <div id="events-right">
+	<% if @event.closed %>
+		<h2 class="my-h2 closed-text" id="total-text">This event is closed</h2>
+	<% end %>
 	<h2 class="my-h2" id="total-text">Event total: <text id="total-amount"><%= number_to_currency(@event.total_balance) %></text></h2>
 	<h2 class="my-h2" id="total-text">Your split: <text id="total-amount"><%= number_to_currency(@event.total_balance / @event.users.length)%></text></h2>
   <h2 class="my-h2" id="owe-text">You owe: <text id="total-debt"><%= number_to_currency(@event.find_user_event_balance(current_user.id).debt) %></text></h2>
