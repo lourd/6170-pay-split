@@ -488,3 +488,29 @@ th {
 		width: 74%;
 	}
 }
+
+.purchases-container {
+	width: 80%;
+	/*background-color: #eee;*/
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	text-align: center;
+	padding-bottom: 5px;
+	h1 {
+		font-size: 40px;
+		font-family: helvetica;
+	}
+	form {
+		margin-bottom: 0px;
+	}
+
+	.my-btn {
+		width: 74%;
+	}
+	.amount {
+		text-align: right;
+	}
+
+}

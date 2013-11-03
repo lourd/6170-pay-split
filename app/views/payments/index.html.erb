@@ -1,29 +1,32 @@
-<h1>Listing payments</h1>
+<div class="back-buttons">
+  <%= button_to events_path, :class => 'my-btn gr-btn back-btn', :method => :get do %>
+    All events
+  <% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Description</th>
-      <th>Amount</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @payments.each do |payment| %>
+<div class="purchases-container">
+  <h1>Your payments</h1>
+  <table class="table center">
+    <thead>
       <tr>
-        <td><%= payment.description %></td>
-        <td><%= payment.amount %></td>
-        <td><%= link_to payment.event.name, event_path(payment.event) %></td>
-        <td><%= link_to 'Show', payment %></td>
+        <th>Event</th>
+        <th>Description</th>
+        <th class="amount">Amount</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @payments.each do |payment| %>
+        <tr>
 
-<%= link_to 'New Payment', new_payment_path %>
+          <td><%= link_to payment.event.name, event_path(payment.event) %></td>
+          <td><%= payment.description %></td>
+          <td class="amount"><%= number_to_currency(payment.amount) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
+
+
