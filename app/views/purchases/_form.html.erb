@@ -12,26 +12,11 @@
   <% end %>
 
 
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.number_field :amount, :class => 'text_field', :step => 'any' %>
-  </div>
-
-  <div class="field">
+    <%= f.text_area :description, :placeholder => "Description of purchase" %>
+    <%= f.number_field :amount, :class => 'text_field', :step => 'any', :placeholder => "Purchase amount" %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-  </div>
-
-  <!--Show list of all events -->
-  <div class="field">
-    <%= f.label :Event %><br>
+    <!--Show list of all events -->
     <%= f.select(:event_id, current_user.events.map {|p| [p.name,p.id]}, :prompt => "Select an Event", :selected => @pre_selected_event) %>
-  </div>
+    <%= f.submit :class => "my-btn gr-btn"%>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

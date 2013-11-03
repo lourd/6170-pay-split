@@ -436,3 +436,25 @@ th {
 	top: 50px;
 	left: 20px;
 }
+
+.new-purchase-container {
+	width: 300px;
+	/*background-color: #eee;*/
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	text-align: center;
+	padding-bottom: 5px;
+	h1 {
+		font-size: 40px;
+		font-family: helvetica;
+	}
+	form {
+		margin-bottom: 0px;
+	}
+
+	.my-btn {
+		width: 74%;
+	}
+}
