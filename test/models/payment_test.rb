@@ -74,11 +74,30 @@ class PaymentTest < ActiveSupport::TestCase
 
   test "distribute payments correctly" do
     event = events(:FirstEvent)
-    user = users(:B)
-    Purchase.create(:amount => 6, :description => "test",
-      :event_id => event.id, :user_id => user.id)
 
-    payment = Payment.create(:amount => )
-    
+    Purchase.create(:amount => 6, :description => "test",
+      :event_id => event.id, :user_id => users(:B).id)
+
+    event.user_event_balances.each do |ueb|
+      ueb.update_credit
+      ueb.update_debt
+    end
+
+    payment = Payment.create(:amount => 6, :description => "test",
+      :event_id => event.id, :user_id => users(:C).id)
+
+    payment.event = event
+    payment.user = users(:C)
+
+    payment.distribute_payment(users(:C).id, 6)
+
+    event.user_event_balances.each do |ueb|
+      ueb.update_credit
+      ueb.update_debt
+      assert_equal 0, ueb.debt
+      assert_equal 0, ueb.credit
+    end
+
+    assert_equal 2, users(:C).payment_splits.count
   end
 end
