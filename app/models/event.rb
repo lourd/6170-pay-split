@@ -32,5 +32,4 @@ class Event < ActiveRecord::Base
 		end
 		sum
 	end
-
 end

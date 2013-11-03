@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class UserEventBalanceTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
   test "compute total user event purchases correctly" do
   	event = events(:FirstEvent)
   	user = users(:C)
@@ -155,5 +151,34 @@ class UserEventBalanceTest < ActiveSupport::TestCase
   	after = ueb.determine_new_credit
 
   	assert_equal -2, after - before
+  end
+
+  test "update debt" do
+  	event = events(:FirstEvent)
+  	user = users(:C)
+  	event.user_event_balances.each do |ueb|
+	  	ueb.update_debt()
+
+	  	assert_equal ueb.debt, ueb.determine_new_debt
+	end
+  end
+
+  test "update credit" do
+  	event = events(:FirstEvent)
+  	event.user_event_balances.each do |ueb|
+	  	ueb.update_credit()
+
+	  	assert_equal ueb.credit, ueb.determine_new_credit
+	end
+  end
+
+  test "update payments received" do
+  	event = events(:FirstEvent)
+  	event.user_event_balances.each do |ueb|
+  		before = ueb.payment_received
+	  	ueb.update_payment_received(10)
+
+	  	assert_equal ueb.payment_received - before, 10
+	end
   end
 end
