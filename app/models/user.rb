@@ -35,10 +35,18 @@ class User < ActiveRecord::Base
 	end
 
 	def total_debt
+		self.user_event_balances.each do |ueb|
+			ueb.update_debt
+		end
+
 		self.user_event_balances.sum('debt')
 	end
 
 	def total_credit
+		self.user_event_balances.each do |ueb|
+			ueb.update_credit
+		end
+
 		self.user_event_balances.sum('credit')
 	end
 end

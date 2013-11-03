@@ -1,13 +1,12 @@
 class Payment < ActiveRecord::Base
-
 	belongs_to :user
 	belongs_to :event
 
-	validates :description, :presence => true
 	validates :amount, :presence => true
 
 	validate :validate_event_selection
 	validate :validate_amount
+	validate :validate_event_not_closed
 
 	# Function to make sure a payment is attached to an event
 	def validate_event_selection
@@ -18,8 +17,15 @@ class Payment < ActiveRecord::Base
 
 	# Function to ensure that user can only pay exactly what they owe to an event
 	def validate_amount
-		unless self.amount and self.amount > 0 and self.amount <= self.event.user_event_balances.find_by_user_id(self.user.id).debt
+		unless self.amount and self.amount > 0 and self.event and self.amount <= self.event.user_event_balances.find_by_user_id(self.user.id).debt
 			self.errors.add(:amount, 'You can only pay at most the amount you owe!')
+
+		end
+	end
+
+	def validate_event_not_closed
+		unless self.event and self.event.closed == false
+			self.errors.add(:event, 'must not be closed to add payment!')
 		end
 	end
 
@@ -38,7 +44,7 @@ class Payment < ActiveRecord::Base
 		# Distribute payment across all user_event_balances with positive credit (i.e. people who are owed money)
 		user_event_balances_with_credit.each do |ueb|
 			#End when there is no more money to distribute
-			if payment <=0
+			if payment <= 0
 				break
 			end
 			# Give each user_event_balance the maximum amount of money from the payment

@@ -1,17 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  password: MyString
-  password_salt: MyString
-  venmo_account: MyString
+A:
+  first_name: A
+  last_name: A
+  email: B@test.com
+  password_hash: testA
+  password_salt: testA
+  venmo_account: testA
 
-two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  password: MyString
-  password_salt: MyString
-  venmo_account: MyString
+B:
+  first_name: B
+  last_name: B
+  email: b@test.com
+  password_hash: testB
+  password_salt: testB
+  venmo_account: testB
+
+C:
+  first_name: C
+  last_name: C
+  email: c@test.com
+  password_hash: testC
+  password_salt: testC
+  venmo_account: testC
