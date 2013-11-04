@@ -160,7 +160,7 @@ body, html, .container, .row {
 
 #events-left {
 	float: left;
-	/*width: 75%;*/
+	width: 60%;
 	/*height: 400px;*/
 	padding-left: 5%;
 	padding-right: 5%;
@@ -273,6 +273,8 @@ th {
 
 .event-table {
 
+	width: 100%;
+
 	.button_to {
 		width: 20px;
 		height: 20px;
@@ -320,10 +322,6 @@ th {
 
 .credit-text {
 	color: green;
-}
-
-.event-table {
-	width: 600px;
 }
 
 #events-show-left {
